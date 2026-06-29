@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+
+		<movies>
+
+			<xsl:for-each select="peliculas/pelicula">
+				<movie>
+					<title>
+						<xsl:value-of select="titulo" />
+					</title>
+					<director>
+						<xsl:value-of select="director" />
+					</director>
+					<genre>
+						<xsl:value-of select="genero" />
+					</genre>
+					<year>
+						<xsl:value-of select="year" />
+					</year>
+				</movie>
+			</xsl:for-each>
+
+		</movies>
+
+	</xsl:template>
+
+</xsl:stylesheet>

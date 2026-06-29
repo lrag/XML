@@ -1,0 +1,298 @@
+////////////////////////////////////////////////
+//Raíz del documento
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+         xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+</fo:root>
+
+////////////////////////////////////////////////
+//Layout master set
+
+<fo:layout-master-set>
+  <!-- Las plantillas de las páginas van aqui -->
+</fo:layout-master-set>
+
+////////////////////////////////////////////////
+//simple page master
+
+<fo:simple-page-master master-name="plantilla">
+  <!-- Esta es la plantilla de una página -->
+</fo:simple-page-master>
+
+////////////////////////////////////////////////
+//contenido de la  página
+
+<fo:page-sequence master-reference="plantilla">
+  <!-- Page content goes here -->
+</fo:page-sequence>
+
+////////////////////////////////////////////////
+//Elementos
+
+Areas: cada plantilla define una serie de áreas rectangulares para formatear el documento
+
+Páginas: Puede indicarse que contenido va en cada página. Si se exporta a HTMLtales páginas no existirán
+
+Regiones: zonas en las que está dividida una página
+
+region-body 	: cuerpo de la pagina
+region-before 	: cabecera
+region-after 	: pie
+region-start 	: zona izquierda
+region-end 		: zona derecha
+
+A su vez las regiones contienen Block Areas
+
+Block Areas : Pequeños bloques que contienen párrafos, tablas, listas, imágenes, etc
+			  Pueden contener otros Block Areas
+			 
+Line Areas : Se encuentran dentro de los block areas y definen líneas de texto.
+
+Inline Areas : Definidas dentro de line areas.
+
+
+////////////////////////////////////////////////
+//Añadiendo contenido
+
+<fo:layout-master-set>
+	<fo:simple-page-master master-name="plantilla">
+		<fo:region-body />
+	</fo:simple-page-master>
+</fo:layout-master-set>
+
+<fo:page-sequence master-reference="plantilla">
+	<fo:flow flow-name="xsl-region-body">
+		<fo:block>
+			Hola mundo
+		</fo:block>
+	</fo:flow>
+</fo:page-sequence>
+
+
+
+////////////////////////////////////////////////
+//LAYOUT-MASTER-SET
+
+Márgenes:
+
+Ancho y alto de la página
+Márgenes iqdo. der. superior e inferior.
+
+SIMPLE-PAGE-MASTER, atributos:
+page-width 
+page-height
+
+margin-top 
+margin-bottom 
+margin-left 
+margin-right 
+margin 
+
+REGIONES DE LA PAGINA, etiquetas
+region-body 
+region-before 
+region-after 
+region-start 
+region-end 
+
+Pueden tener los mismos atributos que simple-page-master excepto los
+relativos al ancho y alto de la página
+
+<fo:simple-page-master master-name="plantilla"
+ page-width="297mm" page-height="210mm"
+ margin-top="1cm"   margin-bottom="1cm"
+ margin-left="1cm"  margin-right="1cm">
+  <fo:region-body   margin="3cm"/>
+  <fo:region-before extent="2cm"/>
+  <fo:region-after  extent="2cm"/>
+  <fo:region-start  extent="2cm"/>
+  <fo:region-end    extent="2cm"/>
+</fo:simple-page-master>
+
+
+////////////////////////////////////////////////
+//BLOCKS
+
+Márgen (igual que la página y las regiones):
+
+margin
+margin-top
+margin-bottom
+margin-left
+margin-right
+
+Borde:
+
+border-style
+border-before-style
+border-after-style
+border-start-style
+border-end-style
+border-top-style (igual que border-before)
+border-bottom-style (igual que border-after)
+border-left-style (igual que border-start)
+border-right-style (igual que border-end)
+
+Color del borde:
+
+border-color
+border-before-color
+border-after-color
+border-start-color
+border-end-color
+border-top-color (igual que border-before)
+border-bottom-color (igual que border-after)
+border-left-color (igual que border-start)
+border-right-color (igual que border-end)
+
+Ancho del borde:
+
+border-width
+border-before-width
+border-after-width
+border-start-width
+border-end-width
+border-top-width (igual que border-before)
+border-bottom-width (igual que border-after)
+border-left-width (igual que border-start)
+border-right-width (igual que border-end)
+
+Block Padding
+
+padding
+padding-before
+padding-after
+padding-start
+padding-end
+padding-top (igual que padding-before)
+padding-bottom (igual que padding-after)
+padding-left (igual que padding-start)
+padding-right (igual que padding-end)
+
+Color de fondo
+
+background-color
+background-image
+background-repeat
+background-attachment (scroll o fixed)
+
+Estilos
+
+font-family
+font-weight
+font-style
+font-size
+font-variant
+Text attributes:
+
+text-align
+text-align-last
+text-indent
+start-indent
+end-indent
+wrap-option 
+reference-orientation (rotación del texto 90º)
+
+break-before (salto de página)
+break-after (salto de página)
+
+
+<fo:flow flow-name="xsl-region-body">
+
+	<fo:block
+	    font-size="14pt" font-family="verdana" color="green"
+	    space-before="5mm" space-after="5mm">
+		Título
+	</fo:block>
+
+	<fo:block
+	    text-indent="5mm"
+	    font-family="verdana" font-size="12pt"
+	    space-before="5mm" space-after="5mm">
+	
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget dapibus quam. Nullam luctus mi vel enim consequat vehicula. 
+		Quisque non mi suscipit, pharetra lorem ut, accumsan ex. Vestibulum velit tellus, pellentesque quis molestie vel, malesuada et 
+		eros. Aenean convallis tincidunt fermentum. Sed eleifend mauris ut turpis tincidunt ultrices ac nec ex. Morbi quis tincidunt 
+		justo. Praesent lorem eros, porttitor a sem vitae, dignissim varius felis. Praesent dignissim, quam in consequat lobortis, massa 
+		enim viverra neque, in tincidunt risus erat et est. Aliquam in mauris ornare, vulputate nisi in, placerat ipsum.
+	</fo:block>
+	
+</fo:flow>
+
+
+
+////////////////////////////////////////////////
+//Listas
+
+<fo:list-block>
+	<fo:list-item>
+		 <fo:list-item-label>
+			 <fo:block>*</fo:block>
+	 	 </fo:list-item-label>
+	 	 <fo:list-item-body>
+	     	<fo:block>Valor 1</fo:block>
+	 	 </fo:list-item-body>
+	</fo:list-item>
+	<fo:list-item>
+		<fo:list-item-label>
+	    	<fo:block>*</fo:block>
+	    </fo:list-item-label>
+	    <fo:list-item-body>
+	    	<fo:block>Valor 2</fo:block>
+	    </fo:list-item-body>
+	</fo:list-item>
+</fo:list-block>
+
+////////////////////////////////////////////////
+//Tablas
+
+<fo:block text-indent="5mm" font-family="verdana" font-size="12pt"
+	space-before="5mm" space-after="5mm">
+	<fo:table>
+		<fo:table-column column-width="20%" />
+		<fo:table-column column-width="80%" />
+		<fo:table-body>
+			<fo:table-row>
+				<fo:table-cell>
+					<fo:block margin="12pt" font-weight="bold" font-size="8pt">
+						UNO
+					</fo:block>
+				</fo:table-cell>
+				<fo:table-cell>
+					<fo:block margin="12pt" font-size="8pt">
+						DOS
+					</fo:block>
+				</fo:table-cell>
+			</fo:table-row>
+			<fo:table-row>
+				<fo:table-cell>
+					<fo:block margin="12pt" font-weight="bold" font-size="8pt">
+						TRES
+					</fo:block>
+				</fo:table-cell>
+				<fo:table-cell>
+					<fo:block margin="12pt" font-size="8pt">
+						CUATRO
+					</fo:block>
+				</fo:table-cell>
+			</fo:table-row>
+		</fo:table-body>
+	</fo:table>
+</fo:block>
+
+////////////////////////////////////////////////
+//
+
+
+////////////////////////////////////////////////
+//
+
+////////////////////////////////////////////////
+//
+
+
+////////////////////////////////////////////////
+//
+
+

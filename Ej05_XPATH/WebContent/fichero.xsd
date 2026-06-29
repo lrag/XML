@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.example.org/fichero" 
+		xmlns:tns="http://www.example.org/fichero" 
+		elementFormDefault="qualified">
+	
+	<element name="raiz">
+		<complexType>
+			<sequence>	
+				<element name="peliculas">
+					<complexType>
+						<sequence>
+							<element name="pelicula" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element name="titulo"   type="string" />
+										<element name="director" type="string" />
+										<element name="genero"   type="string" />
+										<element name="year"     type="integer" />
+									</sequence>
+									<attribute name="id" use="required" type="integer"/>
+								</complexType>
+							</element>	
+						</sequence>
+					</complexType>
+				</element>				
+				<element name="libros">
+					<complexType>
+						<sequence>
+							<element name="libro" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element name="titulo"   type="string" />
+										<element name="ISBN"     type="string" />
+										<element name="precio"   type="double" />
+										<element name="autor">
+											<complexType>
+												<sequence>
+													<element name="nombre"   type="string" />
+													<element name="pais"     type="string" />			
+												</sequence>
+											</complexType>
+										</element>
+									</sequence>
+									<attribute name="id" use="required" type="integer"/>
+								</complexType>
+							</element>	
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>	
+
+	<!-- 
+	<complexType name="pelicula">
+		<sequence>
+			<element name="titulo"   type="string" />
+			<element name="director" type="string" />
+			<element name="genero"   type="string" />
+			<element name="year"     type="integer" />
+		</sequence>
+		<attribute name="id" use="required" type="integer"/>
+	</complexType>
+
+	<element name="peliculas">
+		<complexType>
+			<sequence>
+				<element name="pelicula" minOccurs="0" maxOccurs="unbounded" type="tns:pelicula"/>
+			</sequence>
+		</complexType>
+	</element>	
+	-->
+		
+</schema>
+
+
+
+
+
+
+
+
+
+

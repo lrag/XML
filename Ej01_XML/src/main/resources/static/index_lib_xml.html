@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script src="fxp.min.js"></script>
+
+<script
+  src="https://code.jquery.com/jquery-4.0.0.min.js"
+  integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+function getPeliculas(){
+    fetch("http://localhost:8080/peliculas")
+    .then(response => response.text()) //en vez de response.json()
+    .then(xml => {
+    	const opciones = {
+   	        ignoreAttributes: false, 
+   	        attributeNamePrefix: ""  
+   	    };
+   	    let parser = new fxp.XMLParser(opciones);
+   	    let obj = parser.parse(xml);
+   	    rellenarTabla(obj.respuesta.data.peliculas.pelicula) //Cosas del XML que no tiene array como tal
+    })
+    .catch(error => console.error(error));    
+}
+
+function rellenarTabla(peliculas){
+    $('#tablaPeliculas').html('')
+    $.each(peliculas, (index, pelicula)=>{
+        let html = `
+            <tr>
+                <td>${pelicula.titulo}</td>
+                <td>${pelicula.director}</td>
+                <td>${pelicula.genero}</td>
+                <td>${pelicula.year}</td>
+            </tr>`
+        $(html).click( () => seleccionarProducto(pelicula.id)).appendTo("#tablaPeliculas")        
+    })
+}
+
+function createPelicula(){
+    return {
+        titulo  : $('#titulo').val(),
+        director: $('#director').val(),
+        genero  : $('#genero').val(),
+        year    : parseInt($('#year').val()) 
+    }    
+}
+
+function insertarPelicula(){
+    
+	//Necesitamos que la etiqueta raíz sea 'pelicula'
+    let peliculaData = {
+    	pelicula: createPelicula()
+    }
+
+    const builder = new fxp.XMLBuilder({
+        format: true
+    });
+    
+    const xml = builder.build(peliculaData);
+    console.log(peliculaData)
+    console.log(xml);
+
+    fetch("http://localhost:8080/peliculas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/xml", 
+            "Accept": "application/xml"        
+        },
+        body: xml
+    })
+    .then(xmlRespuesta => {
+        alert("¡Película insertada con éxito!")
+        console.log("Respuesta:", xmlRespuesta)
+        getPeliculas()
+        vaciarFormulario()
+    })
+    .catch(error => {
+        console.error("Hubo un problema con la petición:", error)
+        alert("No se pudo insertar la película. Revisa los datos o el formato.")
+    })
+}
+
+function vaciarFormulario(){
+    $('#titulo').val('')
+    $('#director').val('')
+    $('#genero').val('')
+    $('#year').val('')
+}
+
+window.onload = function(){
+	$("#btnInsertar").click(insertarPelicula)
+    getPeliculas()
+}
+
+</script>
+
+<body>
+
+	<h1 align="center">XML</h1>
+
+	<div align="center">
+        <button type="button" id="btnInsertar">Insertar</button>
+        <button type="button">Modificar</button>
+        <button type="button">Borrar</button>
+        <button type="button">Vaciar</button>
+    </div>
+
+    <br><br>
+
+    <div align="center">
+        <form>
+            <table border="0" cellpadding="5">
+                <tr>
+                    <td>Título:</td>
+                    <td><input type="text" id="titulo"></td>
+                </tr>
+                <tr>
+                    <td>Director:</td>
+                    <td><input type="text" id="director"></td>
+                </tr>
+                <tr>
+                    <td>Género:</td>
+                    <td><input type="text" id="genero"></td>
+                </tr>
+                <tr>
+                    <td>Año (Year):</td>
+                    <td><input type="text" id="year"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <br><br>
+
+    <div align="center">
+        <table border="1" cellpadding="8" cellspacing="0">
+            <tr>
+                <th>Título</th>
+                <th>Director</th>
+                <th>Género</th>
+                <th>Año</th>
+            </tr>
+            <tbody id="tablaPeliculas"></tbody>
+        </table>
+    </div>
+
+</body>
+</html>

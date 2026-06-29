@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.example.org/peliculas" 
+		xmlns:tns="http://www.example.org/peliculas" 
+		elementFormDefault="qualified">
+		
+	<!-- 
+	<element name="peliculas">
+		<complexType>
+			<sequence>
+				<element name="pelicula" minOccurs="0" maxOccurs="unbounded">
+					<complexType>
+						<sequence>
+							<element name="titulo"   type="string" />
+							<element name="director" type="string" />
+							<element name="genero"   type="string" />
+							<element name="year"     type="integer" />
+						</sequence>
+						<attribute name="id" use="required" type="integer"/>
+					</complexType>
+				</element>	
+			</sequence>
+		</complexType>
+	</element>
+	-->
+		
+	<complexType name="pelicula">
+		<sequence>
+			<element name="titulo"   type="string" />
+			<element name="director" type="string" />
+			<element name="genero"   type="string" />
+			<element name="year"     type="integer" />
+		</sequence>
+		<attribute name="id" use="required" type="integer"/>
+	</complexType>
+
+	<element name="peliculas">
+		<complexType>
+			<sequence>
+				<element name="pelicula" minOccurs="0" maxOccurs="unbounded" type="tns:pelicula"/>
+			</sequence>
+		</complexType>
+	</element>	
+		
+</schema>
+
+
+
+
+
+
+
+
+
+

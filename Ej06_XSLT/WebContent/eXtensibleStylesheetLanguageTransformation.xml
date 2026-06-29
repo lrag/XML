@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+		<html>
+			<body>
+
+				<h2 align="center">Biblioteca</h2>
+
+				<p align="center">
+					Fecha:
+					<xsl:value-of select="raiz/fecha" />
+				</p>
+
+				<xsl:for-each select="raiz/peliculas/pelicula">
+				  	<xsl:sort select="titulo" order="descending"/>
+					<xsl:value-of select="titulo"/>-<xsl:value-of select="@id"/>
+					<br/>
+				</xsl:for-each>
+
+				<hr/>
+				
+				<xsl:for-each select="raiz/libros/libro">
+				  	<xsl:sort select="titulo"/>
+				  	
+				  	<xsl:choose>
+				  		<xsl:when test="existencias = 0">
+				  			<font color="red">
+				  				<xsl:value-of select="titulo"/>
+				  			</font>
+				  		</xsl:when>
+				  		<xsl:when test="existencias &lt; 6">
+				  			<font color="orange">
+				  				<xsl:value-of select="titulo"/>
+				  			</font>
+				  		</xsl:when>
+				  		<xsl:otherwise>
+				  			<font color="green">
+				  				<xsl:value-of select="titulo"/>
+				  			</font>
+				  		</xsl:otherwise>
+				  	</xsl:choose>
+				  	
+					<xsl:value-of select="titulo"/>-<xsl:value-of select="existencias"/>
+					<br/>
+				</xsl:for-each>
+				
+				
+				
+				
+				
+				
+				
+			</body>
+		</html>
+	</xsl:template>
+
+</xsl:stylesheet>

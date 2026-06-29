@@ -1,0 +1,161 @@
+
+/////////////////////////////////////////////
+//Cargando un xml con una petición ajax
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	procesarRespuesta(this.responseXML);
+    }
+};
+xhttp.open("GET", "peliculas.xml", true);
+xhttp.send();
+
+function procesarRespuesta(xml){
+
+}
+
+/////////////////////////////////////////////
+//Nodes
+//TextNodes
+//AttributeNodes
+
+/////////////////////////////////////////////
+//Obteniendo el nodo raíz
+
+var raiz = xml.documentElement;
+
+/////////////////////////////////////////////
+//Buscando nodos por nombre del elemento
+
+xml.getElementsByTagName("titulo");
+for(var a=0; a<nodos.length; a++){
+	console.log(nodos[a].nodeName);
+}
+
+/////////////////////////////////////////////
+//Obteniendo el nombre de un elemento
+
+nodo.nodeName
+
+/////////////////////////////////////////////
+//Obteniendo el tipo de un nodo
+
+nodo.nodeType
+
+1-elemento
+2-atributo
+3-nodo de texto
+8-comentario
+9-document
+
+/////////////////////////////////////////////
+//Obteniendo el valor de un nodo
+
+nodo.nodeValue
+
+/////////////////////////////////////////////
+//Obteniendo los hijos de un nodo
+
+nodo.childNodes; (array)
+
+/////////////////////////////////////////////
+//Obteniendo los atributos de un elemento
+
+nodo.attributes; (array)
+
+/////////////////////////////////////////////
+//Obteniendo un atributo concreto
+atributo = nodo.getAttribute("nombreAtributo");
+valor = atributo.nodeValue;
+
+/////////////////////////////////////////////
+//Navegando por el documento
+parentNode
+childNodes
+firstChild
+lastChild
+nextSibling
+previousSibling
+
+////////////////////////////////////////////////////////////////////
+//Recorriendo los hijos de un nodo un navegador puede interpretar
+//los espacios de sangrado y los saltos de línea como nodos de texto
+//Podemos ignorarlos comprobando si su nodeType es 3
+
+/////////////////////////////////////////////
+//Cambiando el valor de los nodos
+
+xml.getElementsByTagName("titulo")[0].childNodes[0].nodeValue = "nuevo valor"
+
+xml.getElementsByTagName("pelicula")[0].setAttribute("id","123");
+xml.getElementsByTagName("pelicula")[0].getAttributeNode("id").nodeValue = "123";
+
+/////////////////////////////////////////////
+//Eliminando nodos
+
+Elementos:
+
+nodo.removeChild(nodoHijo)
+
+nodo = xml.getElementsByTagName("libro")[0];
+nodo.parentNode.removeChild(nodo);
+
+Atributos:
+
+nodos = xml.getElementsByTagName("libro");
+nodos[0].removeAttribute("ISBN");
+
+
+/////////////////////////////////////////////
+//Creando nodos
+
+Elementos:
+
+nuevoElemento = xml.createElement("pelicula");
+xml.getElementsByTagName("peliculas")[0].appendChild(nuevoElemento);
+
+Atributos:
+
+id = xmlDoc.createAttribute("id");
+id.nodeValue = "456";
+xml.getElementsByTagName("pelicula")[0].setAttributeNode(id);
+
+También:
+
+xml.getElementsByTagName('pelicula')[0].setAttribute("id","456");
+
+Nodos de texto:
+
+texto = xmlDoc.createTextNode("Texto");
+
+/////////////////////////////////////////////
+//Reemplazando nodos
+
+nodo.replaceChild(nuevoNodo,nodoAReemplazar);
+
+/////////////////////////////////////////////
+//Añadiendo nodos
+
+Al final:
+
+nodo.appendChild(hijo);
+
+En una posición concreta:
+
+hijo = xmlDoc.createElement("libro");
+libros = xmlDoc.documentElement;
+libroExistente = xmlDoc.getElementsByTagName("libro")[3];
+libros.insertBefore(hijo,libroExistente);
+
+/////////////////////////////////////////////
+//Clonando nodos
+
+true: clona atributos e hijos
+
+nodoExistente = xmlDoc.getElementsByTagName('libro')[0];
+nuevo = nodoExistente.cloneNode(true);
+
+
+
+

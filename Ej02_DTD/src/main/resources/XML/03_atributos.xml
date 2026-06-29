@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+Referenciamos el DTD
+<!DOCTYPE etiqueta_raíz SYSTEM "ruta al DTD">
+-->
+<!DOCTYPE raiz SYSTEM "03_atributos.dtd">
+
+<!-- 
+<raiz emisor="movida">
+-->
+<raiz emisor="AppAngularCliente">
+
+	<cliente></cliente>
+	<cliente id="1"></cliente>
+	<!-- 
+	<cliente id="1" movida="2"></cliente>
+	-->
+	
+	<!-- 
+	<producto></producto>
+	-->
+	<producto id="0"></producto>
+	
+	<factura></factura>
+	<factura pedido="PED-0"></factura>
+	
+	<factura estado="pendiente"></factura>
+	<factura estado="emitida"></factura>
+	<factura estado="cobrada"></factura>
+	<!-- 
+	<factura estado="OTRO"></factura>
+	-->
+
+</raiz>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript">
+
+function obtenerFicheroXML(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	procesarRespuesta(this.responseXML);
+	    }
+	};
+	xhttp.open("GET", "peliculas.xml", true);
+	xhttp.send();
+}
+
+function procesarRespuesta(xml){
+
+	console.log(xml.nodeType);
+	
+	var raiz = xml.documentElement;
+	console.log("raiz:"+raiz+" Nombre:"+raiz.nodeName+" Tipo:"+raiz.nodeType);
+	
+	console.log("----------------------------------")
+	var nodos = xml.getElementsByTagName("titulo");
+	for(var a=0; a<nodos.length; a++){
+		var nodo = nodos[a];		
+		console.log(nodo.nodeName+" Valor:"+nodo.childNodes[0].nodeValue);
+	}
+
+	console.log("----------------------------------")
+	nodos = xml.getElementsByTagName("pelicula");
+	for(var a=0; a<nodos.length; a++){
+		var nodo = nodos[a];	
+		console.log(nodo.attributes[0].nodeValue);
+		console.log(nodo.nodeName+" id:"+nodo.getAttribute("id"));
+	}
+	
+	console.log("----------------------------------")
+	xml.getElementsByTagName("titulo")[0].childNodes[0].nodeValue = "2001, una odisea en el espacio"
+	xml.getElementsByTagName("pelicula")[0].setAttribute("id","123");
+	xml.getElementsByTagName("pelicula")[0].getAttributeNode("id").nodeValue = "123";
+
+	console.log(xml);
+
+	console.log("----------------------------------")
+	nodos = xml.getElementsByTagName("pelicula");
+	for(var a=0; a<nodos.length; a++){
+		var nodo = nodos[a];	
+		if( nodo.getAttribute("id") == 6){
+			nodo.parentNode.removeChild(nodo);
+		}
+	}	
+	
+	console.log(xml);
+	
+	console.log("----------------------------------")
+
+	//Elementos
+	var pelicula = xml.createElement("pelicula");
+	var titulo   = xml.createElement("titulo");
+	var director = xml.createElement("director");
+	var genero   = xml.createElement("genero");
+	var year     = xml.createElement("year");
+	
+	//Nodos de texto
+	var txtTitulo = xml.createTextNode("Los goonies");
+	var txtDirector = xml.createTextNode("Richard Donner");
+	var txtGenero = xml.createTextNode("Aventuras");
+	var txtYear = xml.createTextNode("1985");
+
+	//Atributos
+	//var id = xml.createAttribute("id");
+	//id.nodeValue = "7";
+	//pelicula.setAttributeNode(id);
+	//
+	//Lo mismo pero escribiendo menos:
+	pelicula.setAttribute("id", 7);
+	
+	//Construimos la jerarquia de nodos
+	pelicula.appendChild(titulo);
+	pelicula.appendChild(director);
+	pelicula.appendChild(genero);
+	pelicula.appendChild(year);
+	
+	titulo.appendChild(txtTitulo);
+	director.appendChild(txtDirector);
+	genero.appendChild(txtGenero);
+	year.appendChild(txtYear);
+	
+	//Añadimos la película al documento
+	//AppendChild añade el nodo al final
+	//xml.getElementsByTagName("peliculas")[0].appendChild(pelicula);
+	
+	//Podemos intercalar insertando antes o despues de un nodo existente
+	peliculas = xml.documentElement; //<peliculas>
+		
+	peliculaExistente = xml.getElementsByTagName("pelicula")[2]; //la tercera
+	peliculas.insertBefore(pelicula,peliculaExistente);
+		
+	console.log(xml);	
+	
+	//Clonando nodos
+	nuevaPelicula = pelicula.cloneNode(true);
+	xml.getElementsByTagName("peliculas")[0].appendChild(nuevaPelicula);
+	
+	
+}
+
+</script>
+
+
+
+<body onload="obtenerFicheroXML()">
+
+	<h1 align="center">
+		Pruebas XML DOM
+	</h1>
+	
+
+</body>
+</html>

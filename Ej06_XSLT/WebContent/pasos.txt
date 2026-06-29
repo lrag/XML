@@ -1,0 +1,88 @@
+////////////////////////////////////////////////////
+//Raíz del XSLT
+
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+////////////////////////////////////////////////////
+//Asociando el xml con los datos con el XSLT
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="eXtensibleStylesheetLanguageTransformation.xml"?>
+
+////////////////////////////////////////////////////
+//Plantilla
+
+<xsl:template match="/">
+	<html>
+		<body>
+
+			<h2 align="center">Biblioteca</h2>
+			
+			<p align="center">
+				Fecha: 
+			</p>
+			
+		</body>
+	</html>
+</xsl:template>
+
+////////////////////////////////////////////////////
+//Extrayendo valores del xml
+
+<raiz>
+	<elemento1 id="1">
+		<elemento2>aaa</elemento2>
+	</elemento1>
+	<elemento1 id="2">
+		<elemento2>bbb</elemento2>
+	</elemento1>
+</tr>
+
+Un valor discreto
+
+<xsl:value-of select="raiz/elemento1[@id=2]/elemento2"/>
+
+Una lista de valores
+
+<xsl:for-each select="raiz/elemento1">
+	<xsl:value-of select="elemento2"/>
+	<xsl:value-of select="@id"/>
+</xsl:for-each>
+
+Ordenando la lista
+
+<xsl:for-each select="raiz/elemento1">
+	<xsl:sort select="elemento2" order="ascending/descending"/>
+
+If
+
+<xsl:if test="X &gt; 10">
+
+Choose 
+
+<xsl:choose>
+  <xsl:when test="expression">
+    ... 
+  </xsl:when>
+  <xsl:otherwise>
+    ... 
+  </xsl:otherwise>
+</xsl:choose>
+
+Variables:
+
+<xsl:variable name="color">
+	<xsl:choose>
+		<xsl:when test="position() mod 2 = 0">
+			#EEEEEE
+		</xsl:when>
+		<xsl:otherwise>
+			#FFFFFF
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<tr bgcolor="{$color}">
+
+
+

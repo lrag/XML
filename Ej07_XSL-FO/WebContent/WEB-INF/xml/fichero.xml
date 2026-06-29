@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<raiz>
+
+	<fecha>
+		10-10-2017
+	</fecha>
+
+	<peliculas>
+		<pelicula id="1">
+			<titulo>2001</titulo>
+			<director>Stanley Kubrik</director>
+			<genero>CiFi</genero>
+			<year>1968</year>
+		</pelicula>
+		<pelicula id="2">
+			<titulo>Alien</titulo>
+			<director>Ridley Scott</director>
+			<genero>CiFi</genero>
+			<year>1979</year>
+		</pelicula>
+		<pelicula id="3">
+			<titulo>Die Hard</titulo>
+			<director>John Mctiernan</director>
+			<genero>Acción</genero>
+			<year>1988</year>
+		</pelicula>
+		<pelicula id="4">
+			<titulo>El jovencito Frankenstein</titulo>
+			<director>Mel Brooks</director>
+			<genero>Comedia</genero>
+			<year>1974</year>
+		</pelicula>
+		<pelicula id="5">
+			<titulo>Mad Max fury road</titulo>
+			<director>George Miler</director>
+			<genero>Acción</genero>
+			<year>2015</year>
+		</pelicula>
+	</peliculas>
+	
+	<libros>
+		
+		<libro id="1">
+			<titulo>El corazón de las tinieblas</titulo>
+			<ISBN>123</ISBN>
+			<precio>10</precio>
+			<existencias>0</existencias>
+			<autor>
+				<nombre>Jospeh Conrad</nombre>
+				<pais>Polonia</pais>
+			</autor>
+		</libro>
+		<libro id="2">
+			<titulo>Pórtico</titulo>
+			<precio>12</precio>
+			<existencias>5</existencias>
+			<ISBN>456</ISBN>
+			<autor>
+				<nombre>Frederik Pohl</nombre>
+				<pais>Estados Unidos</pais>
+			</autor>
+		</libro>
+		<libro id="3">
+			<titulo>Fundacion y tierra</titulo>
+			<precio>14</precio>
+			<existencias>10</existencias>
+			<ISBN>789</ISBN>
+			<autor>
+				<nombre>Isaac Asimov</nombre>
+				<pais>Estados Unidos</pais>
+			</autor>
+		</libro>
+	
+	</libros>
+		
+</raiz>

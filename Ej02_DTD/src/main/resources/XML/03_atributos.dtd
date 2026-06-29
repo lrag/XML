@@ -1,0 +1,37 @@
+<!--
+<!ATTLIST element-name attribute-name attribute-type attribute-value>
+-->
+
+<!ELEMENT cliente EMPTY>
+<!ATTLIST cliente id CDATA "0">
+
+<!--
+<!ATTLIST element-name attribute-name attribute-type #REQUIRED>
+-->
+
+<!ELEMENT producto EMPTY>
+<!ATTLIST producto id CDATA #REQUIRED>
+
+<!--
+Opcional y sin valor por defecto
+<!ATTLIST element-name attribute-name attribute-type #IMPLIED>
+-->
+
+<!ELEMENT factura EMPTY>
+<!ATTLIST factura pedido CDATA #IMPLIED>
+
+<!--
+Con un valor prefijado que no se puede cambiar
+<!ATTLIST element-name attribute-name attribute-type #FIXED "valor">
+-->
+
+<!ELEMENT raiz ANY>
+<!ATTLIST raiz emisor CDATA #FIXED "AppAngularCliente">
+
+<!--
+<!ATTLIST element-name attribute-name (v1|v2|..) default-value>
+-->
+
+<!ATTLIST factura estado (pendiente|emitida|cobrada) "pendiente">
+
+

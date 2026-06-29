@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 	
+Utilizamos namespaces cuando hay colisiones en los nombres de las etiquetas
+
+Tienen un nombre arbitrario:
+- muebles
+- html
+
+El valor es una cadena de texto cualquiera
+Se recomienda que sea una URI
+Normalmente se utilizan URLs
+En ningún momento se conecta a esa url
+Se aprovecha la url para poner una web que describe el namespace
+-http://www.w3.org/1999/xhtml
+-->
+<inventario 
+    xmlns:muebles="https://www.muebles.com/muebles"
+    xmlns:html="http://www.w3.org/1999/xhtml">
+
+    <muebles:table>
+        <muebles:nombre>Mesa</muebles:nombre>
+        <muebles:material>Madera maciza</muebles:material>
+        <muebles:patas>4</muebles:patas>
+    </muebles:table>
+
+    <html:table border="1">
+        <html:tr>
+            <html:th>Nombre</html:th>
+            <html:th>Precio</html:th>
+        </html:tr>
+        <html:tr>
+            <html:td>Mesa estupenda</html:td>
+            <html:td>300</html:td>
+        </html:tr>
+    </html:table>
+
+</inventario>

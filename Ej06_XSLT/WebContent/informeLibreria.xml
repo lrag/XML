@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+		<html>
+			<body>
+
+				<h2 align="center">
+					Librería
+				</h2>
+
+				<p align="center">
+					Fecha:
+					<xsl:value-of select="raiz/fecha/text()" />
+				</p>
+
+				<h2 align="center">
+					Películas
+				</h2>
+
+				<table align="center" border="1">
+					<tr>
+						<th>Título</th>
+						<th>Director</th>
+						<th>Genero</th>
+						<th>Año</th>
+					</tr>
+					<xsl:for-each select="raiz/peliculas/pelicula">
+						<xsl:sort select="titulo" order="descending" />
+
+						<xsl:variable name="color">
+							<xsl:choose>
+								<xsl:when test="position() mod 2 = 0">
+									#EEEEEE
+								</xsl:when>
+								<xsl:otherwise>
+									#FFFFFF
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
+
+						<tr bgcolor="{$color}">
+
+							<td>
+								<xsl:value-of select="@id" />
+								-
+								<xsl:value-of select="titulo" />
+								<xsl:if test="estado = 'Descatalogado'">
+									<font color="orange">No disponible</font>
+								</xsl:if>
+							</td>
+							<td>
+								<xsl:value-of select="director" />
+							</td>
+							<td>
+								<xsl:value-of select="genero" />
+							</td>
+							<td>
+								<xsl:value-of select="year" />
+							</td>
+						</tr>
+					</xsl:for-each>
+				</table>
+
+				<h2 align="center">
+					Libros
+				</h2>
+
+				<table align="center" border="1">
+					<tr>
+						<th>Título</th>
+						<th>ISBN</th>
+						<th>Precio</th>
+						<th>existencias</th>
+						<th>Autor</th>
+						<th>País</th>
+					</tr>
+					<xsl:for-each select="raiz/libros/libro">
+						<tr>
+							<td>
+
+								<xsl:value-of select="@id" />
+								-
+								<xsl:choose>
+									<xsl:when test="existencias = 0">
+										<font color="red">
+											<xsl:value-of select="titulo" />
+										</font>
+									</xsl:when>
+									<xsl:when test="existencias &lt; 6">
+										<font color="orange">
+											<xsl:value-of select="titulo" />
+										</font>
+									</xsl:when>
+									<xsl:otherwise>
+										<font color="green">
+											<xsl:value-of select="titulo" />
+										</font>
+									</xsl:otherwise>
+								</xsl:choose>
+
+							</td>
+							<td>
+								<xsl:value-of select="ISBN" />
+							</td>
+							<td>
+								<xsl:value-of select="precio" />
+							</td>
+							<td>
+								<xsl:value-of select="existencias" />
+							</td>
+							<td>
+								<xsl:value-of select="autor/nombre" />
+							</td>
+							<td>
+								<xsl:value-of select="autor/pais" />
+							</td>
+						</tr>
+						<xsl:for-each select="tiendas/tienda">
+							<tr>
+								<td colspan="4">
+									<xsl:if test="position() = 1">
+										<b>Tiendas:</b>
+									</xsl:if>
+								</td>
+								<td>
+									<xsl:value-of select="nombre" />
+								</td>
+								<td>
+									<xsl:value-of select="direccion" />
+								</td>
+							</tr>
+						</xsl:for-each>
+					</xsl:for-each>
+				</table>
+
+			</body>
+		</html>
+	</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Esto es un comentario -->
+
+<!--  
+XML: eXtensible Markup Language
+
+W3C Recommendation
+
+- Guardar información y trasegarla
+- Diseñado para ser autodescriptivo
+- Legible por máquinas y seres humanos
+-->
+
+<!--
+
+ÁRBOL DE NODOS
+ 
+La información se organiza como un árbol de nodos
+
+NODOS
+
+Los nodos pueden ser de tres tipos:
+
+- Elementos/etiquetas
+- Atributos
+- Nodos de texto
+
+ELEMENTOS
+
+cada etiqueta debe cerrarse
+
+Si tiene contenido:
+
+<etiqueta>
+	hijos
+</etiqueta>
+
+Si no tiene puede cerrarse sobre si misma
+
+<etiqueta/>
+
+Una etiqueta/elemento puede contener
+- Otras etiquetas
+- Atributos
+- Nodos de texto
+
+ATRIBUTOS
+
+Mejor para metadatos
+
+<etiqueta atributo="valor"></etiqueta>
+<etiqueta atributo='valor'></etiqueta>
+
+NODOS DE TEXTO
+
+Si en un nodo de texto hay caracteres especiales que se utilizan en un XML <>&'"=\
+utilizaremos el equivalente como entity reference
+
+&lt;	<	
+&gt;	>	
+&amp;	&	 
+&apos;	'	
+&quot;	"	
+
+-->
+
+<peliculas>
+	<pelicula id="1">
+		<titulo>2001</titulo>
+		<director>Stanley Kubrick</director>
+		<genero>CiFi</genero>
+		<year>1968</year>
+	</pelicula>	
+	<pelicula id="2">
+		<titulo>Alien</titulo>
+		<director>Ridley Scott</director>
+		<genero>CiFi</genero>
+		<year>1979</year>
+	</pelicula>	
+	<pelicula id="3">
+		<titulo>Die Hard</titulo>
+		<director>John McTiernan</director>
+		<genero>Acción (prototipo)</genero>
+		<year>1989</year>
+	</pelicula>	
+	<pelicula id="">
+		<titulo>Dirty Harry</titulo>
+		<director>Don Siegel</director>
+		<genero>Accion-Thriller</genero>
+		<year>1971</year>
+	</pelicula>	
+</peliculas>
+
+
+
+
+
+

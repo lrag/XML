@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<peliculas xmlns="http://www.example.org/peliculas"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.example.org/peliculas peliculas.xsd">
+	
+	<pelicula id="1">
+		<titulo>2001</titulo>
+		<director>Stanley Kubrik</director>
+		<genero>CiFi</genero>
+		<year>1968</year>
+	</pelicula>
+	<pelicula id="2">
+		<titulo>Alien</titulo>
+		<director>Ridley Scott</director>
+		<genero>CiFi</genero>
+		<year>1979</year>
+	</pelicula>
+	<pelicula id="3">
+		<titulo>Die Hard</titulo>
+		<director>John Mctiernan</director>
+		<genero>Acción</genero>
+		<year>1988</year>
+	</pelicula>
+	<pelicula id="4">
+		<titulo>El jovencito Frankenstein</titulo>
+		<director>Mel Brooks</director>
+		<genero>Comedia</genero>
+		<year>1974</year>
+	</pelicula>
+	<pelicula id="5">
+		<titulo>Mad Max fury road</titulo>
+		<director>George Miler</director>
+		<genero>Acción</genero>
+		<year>2015</year>
+	</pelicula>
+	<pelicula id="6">
+		<titulo>AAA</titulo>
+		<director>BBB</director>
+		<genero>CCC</genero>
+		<year>2017</year>
+	</pelicula>
+	
+</peliculas>

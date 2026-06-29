@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<raiz>
+
+	<documento>
+		<texto>
+			<!-- 
+			Esto es PCDATA.
+			Parsed Character Data: Se analizará al procesar el XML. 
+			- Puede tener etiquetas y demás
+			
+			No tiene ninguna sintaxis que indique que es PCDATA 
+			-->
+			Hola que tal
+		</texto>	
+	</documento>
+	
+	<!--
+	Sintácticamente incorrecto. En PCDATA se analiza el texto
+	<documento>
+		<texto>
+			1 > 0 
+			10 < 10
+		</texto>	
+	</documento>
+	-->
+
+	<!-- Sustituyendo los caracteres especiales -->
+	<documento>
+		<texto>
+			1 &gt; 0 
+			10 &lt; 10
+		</texto>	
+	</documento>
+	
+	<documento>
+		<texto>
+			<![CDATA[
+	    	    Este bloque es CDATA
+	    	    No se analiza, se toma literalmente como un nodo de texto 
+				<, >, &
+				<etiquetas>
+					<que>
+						<no>
+							<se>
+								<analizan/>
+							</se>
+						</no>
+					</que>
+				</etiquetas>
+		    ]]>	
+		    
+		    Este texto si se analiza
+		    <negrita>esto es correcto, mezclar nodos de texto con etiquetas</negrita>
+		    Pero lo haremos en contadas ocasiones. Probablemente nunca
+		    	
+		</texto>	
+	</documento>
+
+</raiz>

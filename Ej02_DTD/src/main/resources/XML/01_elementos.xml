@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+Referenciamos el DTD
+<!DOCTYPE etiqueta_raíz SYSTEM "ruta al DTD">
+-->
+<!DOCTYPE cliente SYSTEM "01_elementos.dtd">
+
+<cliente>
+	<id>1</id>
+	<nombre>Ringo Starr</nombre>
+	<direccion>C/Su casa</direccion>
+	<telefono>123456789</telefono>
+	<!--
+	<movida></movida>
+	-->
+</cliente>

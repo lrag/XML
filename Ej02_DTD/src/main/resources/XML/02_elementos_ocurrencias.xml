@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE raiz SYSTEM "02_elementos_ocurrencias.dtd">
+
+<raiz>
+	<table>
+		<tableHead>
+		</tableHead>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+</raiz>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<fo:layout-master-set>
+
+		<fo:simple-page-master master-name="plantilla"
+			page-width="297mm" page-height="210mm" margin-top="1cm"
+			margin-bottom="1cm" margin-left="1cm" margin-right="1cm">
+			<fo:region-body margin="3cm" />
+			<fo:region-before extent="2cm" />
+			<fo:region-after extent="2cm" />
+			<fo:region-start extent="2cm" />
+			<fo:region-end extent="2cm" />
+		</fo:simple-page-master>
+
+	</fo:layout-master-set>
+
+	<fo:page-sequence master-reference="plantilla">
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block>
+				Hola mundo
+
+				<xsl:value-of select="raiz/fecha" />
+
+			</fo:block>
+
+			<fo:block font-size="14pt" font-family="verdana" color="green"
+				space-before="5mm" space-after="5mm">
+				Hola mundo
+			</fo:block>
+
+			<fo:block text-indent="5mm" font-family="verdana" font-size="12pt"
+				space-before="5mm" space-after="5mm">
+
+				Lorem ipsum dolor sit amet,
+				consectetur adipiscing elit. Duis eget
+				dapibus
+				quam. Nullam luctus mi
+				vel enim consequat vehicula.
+				Quisque
+				non mi suscipit, pharetra lorem
+				ut, accumsan ex. Vestibulum velit
+				tellus, pellentesque quis molestie
+				vel, malesuada et
+				eros. Aenean
+				convallis tincidunt fermentum. Sed
+				eleifend mauris ut turpis
+				tincidunt ultrices ac nec ex. Morbi quis
+				tincidunt
+				justo. Praesent
+				lorem eros, porttitor a sem vitae, dignissim
+				varius felis.
+				Praesent
+				dignissim, quam in consequat lobortis, massa
+				enim viverra neque, in
+				tincidunt risus erat et est. Aliquam in mauris
+				ornare, vulputate nisi
+				in, placerat ipsum........
+
+			</fo:block>
+
+
+			<fo:block text-indent="5mm" font-family="verdana" font-size="12pt"
+				space-before="5mm" space-after="5mm">
+				<fo:table>
+					<fo:table-column column-width="20%" />
+					<fo:table-column column-width="80%" />
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell border-style="solid" border-width="1px">
+								<fo:block margin="12pt" font-weight="bold" font-size="8pt">
+									UNO
+								</fo:block>
+							</fo:table-cell>
+							<fo:table-cell border-style="solid" border-width="1px">
+								<fo:block margin="12pt" font-size="8pt">
+									DOS
+								</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+
+						<xsl:for-each select="raiz/peliculas/pelicula">
+							<fo:table-row>
+								<fo:table-cell border-style="solid" border-width="1px">
+									<fo:block margin="12pt" font-weight="bold" font-size="8pt">
+										<xsl:value-of select="titulo" />
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border-style="solid" border-width="1px">
+									<fo:block margin="12pt" font-size="8pt">
+										<xsl:value-of select="director" />
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</xsl:for-each>
+
+					</fo:table-body>
+				</fo:table>
+			</fo:block>
+
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

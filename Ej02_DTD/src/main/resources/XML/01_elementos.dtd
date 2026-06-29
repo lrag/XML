@@ -1,0 +1,58 @@
+<!--
+Componentes de un XML:
+ 
+Elementos/etiquetas
+Atributos
+Entidades
+PCDATA: Parsed Character Data
+CDATA: Nodo de texto que no se analiza
+
+
+ELEMENTOS
+
+<!ELEMENT element-name category>
+<!ELEMENT element-name (element-content)>
+
+Elementos vacíos
+
+	<!ELEMENT element-name EMPTY>
+
+	<!ELEMENT br EMPTY>
+	<br/>
+
+Elementos con únicamente PCData en el que no se esperan etiquetas
+
+	<!ELEMENT element-name (#PCDATA)>
+
+	<!ELEMENT texto (#PCDATA)>
+
+	<texto>
+		Si aquí hubiera etiquetas daría error al validar
+	</texto>
+	
+Elementos con cualquier contenido
+
+	<!ELEMENT element-name ANY>
+	
+	<!ELEMENT contenido ANY>	
+
+Elementos con hijos (secuencias)
+
+	<!ELEMENT element-name (hijo)
+	<!ELEMENT element-name (hijo1, hijo2, hijo3)
+	
+	<!ELEMENT pelicula (id, titulo, director, genero, year)
+	Los hijos deben ser declarados
+	<!ELEMENT id (#PCDATA)>
+	<!ELEMENT titulo (#PCDATA)>
+	<!ELEMENT director (#PCDATA)>
+	<!ELEMENT genero (#PCDATA)>	
+	<!ELEMENT year (#PCDATA)>	
+	
+-->
+
+<!ELEMENT cliente (id, nombre, direccion, telefono)>
+<!ELEMENT id        (#PCDATA)>
+<!ELEMENT nombre    (#PCDATA)>
+<!ELEMENT direccion (#PCDATA)>
+<!ELEMENT telefono  (#PCDATA)>
