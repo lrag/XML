@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE peliculas SYSTEM "peliculas.dtd">
+<peliculas>
+	<pelicula id="1">
+		<titulo>2001</titulo>
+		<director>Stanley Kubrick</director>
+		<genero>CiFi</genero>
+		<year>1968</year>
+	</pelicula>	
+	<pelicula id="2">
+		<titulo>Alien</titulo>
+		<director>Ridley Scott</director>
+		<genero>CiFi</genero>
+		<year>1979</year>
+	</pelicula>	
+	<pelicula id="3">
+		<titulo>Die Hard</titulo>
+		<director>John McTiernan</director>
+		<genero>Acción (prototipo)</genero>
+		<year>1989</year>
+	</pelicula>	
+	<pelicula id="4">
+		<titulo>Dirty Harry</titulo>
+		<director>Don Siegel</director>
+		<genero>Accion-Thriller</genero>
+		<year>1971</year>
+	</pelicula>	
+</peliculas>
+
+
+
+
+
+

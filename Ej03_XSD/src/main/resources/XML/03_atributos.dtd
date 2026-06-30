@@ -34,8 +34,4 @@ Con un valor prefijado que no se puede cambiar
 
 <!ATTLIST factura estado (pendiente|emitida|cobrada) "pendiente">
 
-<!ELEMENT coche EMPTY>
-	<!ATTLIST coche marca CDATA #REQUIRED>
-	<!ATTLIST coche modelo CDATA #IMPLIED>
-	<!ATTLIST coche matricula CDATA "">
-	<!ATTLIST coche color CDATA #FIXED "Rojo">
+

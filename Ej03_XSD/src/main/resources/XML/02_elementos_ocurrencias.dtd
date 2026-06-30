@@ -77,19 +77,6 @@ Contenido variable
 <!ELEMENT hamburguesa (ingrediente+)>
 <!ELEMENT ingrediente (#PCDATA)>
 
-<!ELEMENT pedido (codigo, cliente, notas?, detalles)>
-	<!ELEMENT codigo (#PCDATA)>
-	<!ELEMENT cliente (codigo,nombre,telefono)>
-		<!--<!ELEMENT codigo (#PCDATA)>-->
-		<!--<!ELEMENT nombre (#PCDATA)>-->
-		<!ELEMENT telefono (#PCDATA)>		
-	<!ELEMENT notas (#PCDATA)>
-	<!ELEMENT detalles (detalle+)>
-		<!ELEMENT detalle (producto, precio, cantidad)>
-			<!ELEMENT producto (#PCDATA)>
-			<!ELEMENT precio (#PCDATA)>
-			<!ELEMENT cantidad (#PCDATA)>
-
 
 
 

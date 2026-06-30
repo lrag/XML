@@ -12,98 +12,63 @@
 
 <script type="text/javascript">
 
-function getPeliculas(){
+
+/*
+//Con el objeto XMLHttpRequest
+function getListadoPeliculas(){
+
+    let xmlHttp = new XMLHttpRequest()
+    
+    //0 - creado
+    //1 - open
+    //2 - enviado
+    //3 - se comienza a recibir la respuesta
+    //4 - respuesta recibida
+    xmlHttp.onreadystatechange = function(){
+        console.log("ESTADO: "+this.readyState)
+        if(this.readyState == 4){
+            console.log("Repuesta recibida:", xmlHttp.responseText)
+        }
+    }    
+    
+    xmlHttp.open("GET", "http://localhost:8080/peliculas", true)
+    xmlHttp.send()
+
+    console.log("Respuesta:",xmlHttp.responseText)
+}
+*/
+
+function getListadoPeliculas(){
+
+    console.log("1-")
     fetch("http://localhost:8080/peliculas")
-    .then(response => response.text()) //en vez de response.json()
-    .then(xml => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xml, "application/xml");
+    .then( function(head) {
+        console.log(X)
+        
+        head.body()
+        head.json()
+        head.text()
 
-        const etiquetasPelicula = xmlDoc.getElementsByTagName("pelicula");
-        const peliculas = [];
+    } )
+    .catch( function(){
+        alert("FALLO AL LISTAR!")
+    } )
 
-        for (let i = 0; i < etiquetasPelicula.length; i++) {
-            const nodoPelicula = etiquetasPelicula[i];
-            const pelicula = {
-                id      : parseInt(nodoPelicula.getAttribute("id")), // Atributo
-                titulo  : nodoPelicula.getElementsByTagName("titulo")[0].textContent, //Nodo de texto hijo de <titulo>
-                director: nodoPelicula.getElementsByTagName("director")[0].textContent,
-                genero  : nodoPelicula.getElementsByTagName("genero")[0].textContent,
-                year    : parseInt(nodoPelicula.getElementsByTagName("year")[0].textContent)
-            };
-            peliculas.push(pelicula);
-        }
-        rellenarTabla(peliculas)
-    })
-    .catch(error => console.error(error));    
-}
-
-function rellenarTabla(peliculas){
-    $('#tablaPeliculas').html('')
-    $.each(peliculas, (index, pelicula)=>{
-        let html = `
-            <tr>
-                <td>${pelicula.titulo}</td>
-                <td>${pelicula.director}</td>
-                <td>${pelicula.genero}</td>
-                <td>${pelicula.year}</td>
-            </tr>`
-        $(html).click( () => seleccionarProducto(pelicula.id)).appendTo("#tablaPeliculas")        
-    })
-}
-
-function insertarPelicula(){
-	let xml = `
-        <pelicula>
-            <titulo>${$('#titulo').val()}</titulo>
-            <director>${$('#director').val()}</director>
-            <genero>${$('#genero').val()}</genero>
-            <year>${$('#year').val()}</year>
-        </pelicula>
-    `
-
-    fetch("http://localhost:8080/peliculas", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/xml", 
-            "Accept": "application/xml"        
-        },
-        body: xml 
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error al insertar: ${response.status}`);
-        }
-        return response.text(); 
-    })
-    .then(xmlRespuesta => {
-        alert("¡Película insertada con éxito!")
-        console.log("Respuesta:", xmlRespuesta)
-        getPeliculas()
-        vaciarFormulario()
-
-    })
-    .catch(error => {
-        console.error("Hubo un problema con la petición:", error)
-        alert("No se pudo insertar la película. Revisa los datos o el formato.")
-    })
-}
-
-function vaciarFormulario(){
-    $('#titulo').val('')
-    $('#director').val('')
-    $('#genero').val('')
-    $('#year').val('')
+    console.log("2-")
 }
 
 window.onload = function(){
-	$("#btnInsertar").click(insertarPelicula)
-    getPeliculas()
+    //getListadoPeliculas()    
 }
+
+
 
 </script>
 
 <body>
+
+    <input type="button" onclick="getListadoPeliculas()">
+
 
 	<h1 align="center">XML</h1>
 

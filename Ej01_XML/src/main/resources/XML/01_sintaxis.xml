@@ -36,6 +36,8 @@ Si tiene contenido:
 	hijos
 </etiqueta>
 
+<etiqueta></etiqueta>
+
 Si no tiene puede cerrarse sobre si misma
 
 <etiqueta/>
@@ -47,6 +49,7 @@ Una etiqueta/elemento puede contener
 
 ATRIBUTOS
 
+Una etiqueta puede tener tantos atributos como necesitemos
 Mejor para metadatos
 
 <etiqueta atributo="valor"></etiqueta>
@@ -63,6 +66,13 @@ utilizaremos el equivalente como entity reference
 &apos;	'	
 &quot;	"	
 
+
+REGLAS DE UN XML
+
+-tiene que tener mínimo una etiqueta
+-solo puede haber una etiqueta raíz
+-cada etiqueta que se abre debe cerrarse
+-los atributos tienen el valor con comillas dobles o simples
 -->
 
 <peliculas>
@@ -84,7 +94,7 @@ utilizaremos el equivalente como entity reference
 		<genero>Acción (prototipo)</genero>
 		<year>1989</year>
 	</pelicula>	
-	<pelicula id="">
+	<pelicula id="4">
 		<titulo>Dirty Harry</titulo>
 		<director>Don Siegel</director>
 		<genero>Accion-Thriller</genero>

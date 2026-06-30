@@ -1,4 +1,8 @@
 <!--
+
+Los DTD vienen del SGML, el XML es muy similar al SGML (1986)
+El SGML viene de GML (1969)
+
 Componentes de un XML:
  
 Elementos/etiquetas
@@ -56,3 +60,14 @@ Elementos con hijos (secuencias)
 <!ELEMENT nombre    (#PCDATA)>
 <!ELEMENT direccion (#PCDATA)>
 <!ELEMENT telefono  (#PCDATA)>
+
+<!-- Los hijos a su vez pueden contener otras etiquetas:-->
+<!ELEMENT libro (ISBN, titulo, autor, year)>
+	<!ELEMENT ISBN (#PCDATA)>
+	<!ELEMENT titulo (#PCDATA)>
+	<!ELEMENT autor (nombre, pais, nacimiento)>
+		<!ELEMENT nombre (#PCDATA)>
+		<!ELEMENT pais (#PCDATA)>
+		<!ELEMENT nacimiento (#PCDATA)>
+	<!ELEMENT year (#PCDATA)>
+

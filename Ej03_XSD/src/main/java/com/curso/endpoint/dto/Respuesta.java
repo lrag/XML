@@ -3,17 +3,6 @@ import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-
-/*
-<respuesta>
-	<success>true/false</success>
-	<message>Listado de peliculas</message>
-	<data>
-		LO QUE SEA
-	</data>
-	<timestamp>1234567879</timestamp>
-</respuesta>
-*/
 @JsonRootName("respuesta")
 public class Respuesta<T> {
 

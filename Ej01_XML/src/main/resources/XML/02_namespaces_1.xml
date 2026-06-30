@@ -13,9 +13,11 @@ En ningún momento se conecta a esa url
 Se aprovecha la url para poner una web que describe el namespace
 -http://www.w3.org/1999/xhtml
 -->
-<inventario 
+<producto id="1234"
     xmlns:muebles="https://www.muebles.com/muebles"
     xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<codigo>REF-1234</codigo>
 
     <muebles:table>
         <muebles:nombre>Mesa</muebles:nombre>
@@ -34,4 +36,4 @@ Se aprovecha la url para poner una web que describe el namespace
         </html:tr>
     </html:table>
 
-</inventario>
+</producto>
