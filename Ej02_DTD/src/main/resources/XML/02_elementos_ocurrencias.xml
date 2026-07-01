@@ -5,9 +5,27 @@
 <raiz>
 	<table>
 		<tableHead>
+			<tr>
+				<th>AAA</th>
+				<th>BBB</th>
+				<th>CCC</th>
+				<th>DDD</th>
+			</tr>
 		</tableHead>
-		<tr>
-			<td></td>
-		</tr>
+		<tableBody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tableBody>
+		
 	</table>
 </raiz>

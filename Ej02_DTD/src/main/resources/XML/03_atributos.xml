@@ -25,11 +25,14 @@ Referenciamos el DTD
 	<factura></factura>
 	<factura pedido="PED-0"></factura>
 	
+	<factura></factura>
 	<factura estado="pendiente"></factura>
 	<factura estado="emitida"></factura>
 	<factura estado="cobrada"></factura>
 	<!-- 
 	<factura estado="OTRO"></factura>
 	-->
+	
+	<coche marca="FIAT" modelo="Uno 45s" matricula="M-5000-JP" color="Rojo"/>
 
 </raiz>

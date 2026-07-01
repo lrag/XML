@@ -22,7 +22,8 @@ Elementos vacíos
 	<!ELEMENT element-name EMPTY>
 
 	<!ELEMENT br EMPTY>
-	<br/>
+	<br>
+	</br>
 
 Elementos con únicamente PCData en el que no se esperan etiquetas
 
@@ -37,15 +38,14 @@ Elementos con únicamente PCData en el que no se esperan etiquetas
 Elementos con cualquier contenido
 
 	<!ELEMENT element-name ANY>
-	
-	<!ELEMENT contenido ANY>	
+	<!ELEMENT contenido ANY>
 
 Elementos con hijos (secuencias)
 
-	<!ELEMENT element-name (hijo)
-	<!ELEMENT element-name (hijo1, hijo2, hijo3)
+	<!ELEMENT element-name (hijo)>
+	<!ELEMENT element-name (hijo1, hijo2, hijo3)>
 	
-	<!ELEMENT pelicula (id, titulo, director, genero, year)
+	<!ELEMENT pelicula (id, titulo, director, genero, year)>
 	Los hijos deben ser declarados
 	<!ELEMENT id (#PCDATA)>
 	<!ELEMENT titulo (#PCDATA)>
@@ -55,19 +55,21 @@ Elementos con hijos (secuencias)
 	
 -->
 
-<!ELEMENT cliente (id, nombre, direccion, telefono)>
+<!ELEMENT cliente (id, nombre, direccion, telefono, libro)>
 <!ELEMENT id        (#PCDATA)>
 <!ELEMENT nombre    (#PCDATA)>
 <!ELEMENT direccion (#PCDATA)>
 <!ELEMENT telefono  (#PCDATA)>
 
-<!-- Los hijos a su vez pueden contener otras etiquetas:-->
+<!--Los hijos a su vez pueden contener otras etiquetas:-->
+
 <!ELEMENT libro (ISBN, titulo, autor, year)>
 	<!ELEMENT ISBN (#PCDATA)>
 	<!ELEMENT titulo (#PCDATA)>
-	<!ELEMENT autor (nombre, pais, nacimiento)>
-		<!ELEMENT nombre (#PCDATA)>
+	<!ELEMENT autor (nombre, pais, fechaNacimiento)>
+		<!--Este ya está declarado arriba 
+		<!ELEMENT nombre (#PCDATA)>-->
 		<!ELEMENT pais (#PCDATA)>
-		<!ELEMENT nacimiento (#PCDATA)>
+		<!ELEMENT fechaNacimiento (#PCDATA)>
 	<!ELEMENT year (#PCDATA)>
 

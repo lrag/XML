@@ -39,22 +39,46 @@ function getListadoPeliculas(){
 */
 
 function getListadoPeliculas(){
-
-    console.log("1-")
     fetch("http://localhost:8080/peliculas")
-    .then( function(head) {
-        console.log(X)
-        
-        head.body()
-        head.json()
-        head.text()
+    .then( function(responseHead) {
+        return responseHead.text() //en vez de response.json()
+    }) 
+    .then(function(xml) {
+        const parser = new DOMParser();
+        //xmlDoc representa la raíz del árbol
+        const xmlDoc = parser.parseFromString(xml, "application/xml");
 
-    } )
-    .catch( function(){
-        alert("FALLO AL LISTAR!")
-    } )
+        const etiquetasPelicula = xmlDoc.getElementsByTagName("pelicula");
+        const peliculas = [];
 
-    console.log("2-")
+        for (let i = 0; i < etiquetasPelicula.length; i++) {
+            const nodoPelicula = etiquetasPelicula[i];
+            const pelicula = {
+                id      : parseInt(nodoPelicula.getAttribute("id")), // Atributo
+                titulo  : nodoPelicula.getElementsByTagName("titulo")[0].textContent, //Nodo de texto hijo de <titulo>
+                director: nodoPelicula.getElementsByTagName("director")[0].textContent,
+                genero  : nodoPelicula.getElementsByTagName("genero")[0].textContent,
+                year    : parseInt(nodoPelicula.getElementsByTagName("year")[0].textContent)
+            };
+            peliculas.push(pelicula);
+        }
+        rellenarTabla(peliculas)
+    })
+    .catch(error => console.error(error));    
+}
+
+function rellenarTabla(peliculas){
+    $('#tablaPeliculas').html('')
+    $.each(peliculas, (index, pelicula)=>{
+        let html = `
+            <tr>
+                <td>${pelicula.titulo}</td>
+                <td>${pelicula.director}</td>
+                <td>${pelicula.genero}</td>
+                <td>${pelicula.year}</td>
+            </tr>`
+        $(html).click( () => seleccionarProducto(pelicula.id)).appendTo("#tablaPeliculas")        
+    })
 }
 
 window.onload = function(){

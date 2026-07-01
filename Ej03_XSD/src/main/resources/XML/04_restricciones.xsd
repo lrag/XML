@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+Restrictiones / Facets
+
+Validacion de datos
+
+MIN/MAX para integer
+
+Este simpleType es anónimo
+Lo que estamos haciendo es crear un nuevo tipo basado en integer, pero
+integer entre 0 y 150. Como es anónimo solo lo podemos utilizar
+en la etiqueta "edad"
+
+<xs:element name="edad">
+  <xs:simpleType>
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="150"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+ENUMERADOS
+
+<xs:element name="coche">
+  <xs:simpleType> <- - - - - - - - - - - ANÓNIMO
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Authi"/>
+      <xs:enumeration value="Simca"/>
+      <xs:enumeration value="Talbot"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Otra manera: 
+
+<xs:element name="car" type="marca"/>
+
+Al estar separados podemos reutilizar "marca" en otras etiquetas
+NO es anónimo
+
+<xs:simpleType name="marca">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Authi"/>
+    <xs:enumeration value="Simca"/>
+    <xs:enumeration value="Talbot"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+EXPRESIONES REGULARES
+
+<xs:element name="letra">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z]"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="password">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z0-9]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Podemos aprovechar la regExp para hacer un enumerado
+
+<xs:element name="color">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="rojo|verde|azul"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+Caracteres en blanco (espacio, tab, saltos de línea...)
+
+<xs:element name="dirección">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/> <- - - se dejan como están
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="direccion">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="replace"/> <- - - se reemplazan todos por espacios
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="address">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="collapse"/> <- - - se reemplazan todos los caracteres en blanco seguidos por un único espacio
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+LONGITUD
+
+<xs:element name="password">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="5"/>
+      <xs:maxLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+
+Resumen de restricciones:
+
+enumeration	
+fractionDigits	
+maxExclusive	< 
+maxInclusive	<=
+length	
+maxLength	
+minLength	
+minExclusive	>
+minInclusive	>=
+pattern	
+totalDigits	
+whiteSpace	
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+</xs:schema> 

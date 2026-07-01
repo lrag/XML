@@ -7,7 +7,15 @@ ELEMENTOS SIMPLES
 Solo contienen un nodo de texto
 El nodo de texto puede tener un tipo
 
-<xs:element name="nombre" type="tipo del nodo de texto"/>
+<xs:element name="nombre">
+  <xs:simpleType>
+    <xs:restriction base="tipo_del_nodo_de_texto"/>
+  </xs:simpleType>
+</xs:element>
+
+ATAJO:
+
+<xs:element name="nombre" type="tipo_del_nodo_de_texto"/>
 
 TIPOS
 
@@ -20,7 +28,7 @@ xs:time
 xs:anyType
 
 <xs:element name="apellidos" type="xs:string"/>
-<xs:element name="edad" type="xs:integer"/>
+<xs:element name="edad"      type="xs:integer"/>
 <xs:element name="fechaAlta" type="xs:date"/>
 
 VALORES POR DEFECTO
@@ -38,5 +46,7 @@ VALORES FIJOS
            targetNamespace="https://www.curso.com"      
            xmlns="https://www.curso.com"			   
            elementFormDefault="qualified">
+           
+	<xs:element name="color" type="xs:string" default="colorao"/>	       
            
 </xs:schema> 

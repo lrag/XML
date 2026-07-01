@@ -19,7 +19,6 @@ import com.curso.endpoint.dto.Respuesta;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 @RestController
-@RequestMapping(path = "/peliculas")
 public class PeliculasEndpointXML {
 	
 	
@@ -39,16 +38,28 @@ public class PeliculasEndpointXML {
 		<message>Listado de peliculas</message>
 		<data>
 			<peliculas>
-				<pelicula></pelicula>
-				<pelicula></pelicula>
-				<pelicula></pelicula>
+				<pelicula id="">
+					<titulo>Condemor</titulo>
+					<director></director>
+				</pelicula>
+				<pelicula id="">
+					<titulo>Bracula</titulo>
+					<director></director>
+				</pelicula>
+				<pelicula id="">
+					<titulo>Papá Piquillo</titulo>
+					<director></director>
+				</pelicula>
 			</peliculas>
 		</data>
 		<timestamp>1234567879</timestamp>
 	</respuesta>
 	*/
 
-	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(
+			path = "/peliculas", 
+			produces = { MediaType.APPLICATION_XML_VALUE }
+		)
 	public ResponseEntity<Respuesta<?>> listarPeliculas() throws IOException{
 		
 		try {
@@ -67,7 +78,10 @@ public class PeliculasEndpointXML {
 	    return ResponseEntity.ok(respuesta);		
 	}
 	
-	@PostMapping
+	@PostMapping(
+			path = "/peliculas", 
+			consumes = { MediaType.APPLICATION_XML_VALUE }
+		)
 	public ResponseEntity<String> insertarPelicula(@RequestBody PeliculaDTO peliculaDTO){		
 		System.out.println("Insertando película: "+peliculaDTO);
 		return new ResponseEntity<>("Película insertada", HttpStatus.CREATED);		

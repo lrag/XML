@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+ATRIBUTOS
+
+Si no se indica lo contrario los atributos son opcionales.
+
+<xs:attribute name="nombre_atributo" type="tipo_atributo"/>
+
+xs:string
+xs:decimal
+xs:integer
+xs:boolean
+xs:date
+xs:time
+xs:anyType
+
+<xs:attribute name="idioma" type="xs:string"/>
+
+DEFAULT
+
+<xs:attribute name="nombre_atributo" type="tipo_atributo" default="valor_por_defecto"/>
+
+FIXED
+
+<xs:attribute name="nombre_atributo" type="tipo_atributo" fized="valor_obligatorio"/>
+
+ATRIBUTO OBLIGATORIO
+
+<xs:attribute name="nombre_atributo" type="tipo_atributo" use="required"/>
+
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+</xs:schema> 

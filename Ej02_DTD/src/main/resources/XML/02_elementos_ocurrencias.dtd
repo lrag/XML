@@ -2,12 +2,20 @@
 
 Elementos con hijos (secuencias)
 
-Una ocurrencia
+Una ocurrencia OBLIGATORIA
 
-	<!ELEMENT element-name (hijo)
+	<!ELEMENT element-name (hijo)>
 	
 	<!ELEMENT pelicula (titulo)>
-	<pelicula>
+	
+	<pelicula>  <- ERROR, es obligatorio
+	</pelicula>
+	
+	<pelicula> <!- OK
+		<titulo>2001</titulo>
+	</pelicula>
+	
+	<pelicula> <- ERROR, debe haber solo una
 		<titulo>2001</titulo>
 		<titulo>ERROR!</titulo>
 	</pelicula>
@@ -19,10 +27,13 @@ Mínimo una ocurrencia
 	<!ELEMENT pelicula (genero+)
 	<!ELEMENT genero (#PCDATA)>
 	
-	<pelicula>
+	<pelicula> <- ERROR
 		ERROR!	
 	</pelicula>	
-	<pelicula>
+	<pelicula> <- OK
+		<genero>Ciencia ficción</genero>	
+	</pelicula>
+	<pelicula> <- OK
 		<genero>Ciencia ficción</genero>	
 		<genero>Terror</genero>
 	</pelicula>
@@ -34,10 +45,12 @@ Cero o más ocurrencias
 	<!ELEMENT pedido (incidencia*)
 	<!ELEMENT incidencia (#PCDATA)>
 	
-	<pedido>
-		OK	
+	<pedido> <- OK	
 	</pedido>	
-	<pedido>
+	<pedido> <- OK
+		<incidencia>Falta un producto</incidencia>	
+	</pedido>		
+	<pedido> <- OK
 		<incidencia>Falta un producto</incidencia>	
 		<incidencia>Direccion incorrecta</incidencia>
 	</pedido>		
@@ -49,16 +62,65 @@ Cero o una ocurrencia
 	<!ELEMENT persona (dni?)
 	<!ELEMENT dni (#PCDATA)>
 	
-	<persona>
-		OK	
+	<persona> <- OK	
 	</persona>	
-	<persona>
+	<persona> <- OK
 		<dni>12345</dni>	
+	</persona>	
+	<persona> <- ERROR
+		<dni>12345</dni>	
+		<dni>54321</dni>	
 	</persona>	
 	
 Contenido variable
 
+	<!ELEMENT etiqueta1 (etiqueta2|etiqueta3)>
+	<!ELEMENT etiqueta2 (#PCDATA)>
+	<!ELEMENT etiqueta3 (#PCDATA)>
+	
+	<etiqueta1>
+		<etiqueta2>aaa</etiqueta2>
+	</etiqueta1>
+	<etiqueta1>
+		<etiqueta3>bbb</etiqueta3>
+	</etiqueta1>
+	
 	<!ELEMENT correo (to,from,(texto|body))>	
+	
+	<correo> <- Error: tiene que tener texto ó body
+		<to>Venancia</to>
+		<from>Venancio</from>
+	</correo>
+	<correo> <- OK
+		<to>Venancia</to>
+		<from>Venancio</from>
+		<texto>OLA KE TAL</texto>
+	</correo>
+	<correo> <- OK
+		<to>Venancia</to>
+		<from>Venancio</from>
+		<body>OLA KE TAL</body>
+	</correo>
+	
+	<!ELEMENT table (tableHead?, (tr+|tableBody))>
+	<!ELEMENT tableHead (tr*)>
+	<!ELEMENT tableBody (tr*)>
+	<!ELEMENT tr ( (td+|th+) )>
+	<!ELEMENT td ANY>
+	<!ELEMENT th ANY>
+	
+	<table>
+		<tr></tr>
+	</table>
+	<table>
+		<tableHead></tableBody>
+		<tr></tr>
+	</table>
+	<table>
+		<tableHead></tableBody>
+		<tableBody></tableBody>
+	</table>	
+	
 	<!ELEMENT table (tableHead?, (tr*|tableBody))>
 	<!ELEMENT documento (capitulo|nota)*>
 -->
@@ -66,22 +128,37 @@ Contenido variable
 <!-- Solución rápida y fatal-->
 <!ELEMENT raiz ANY>
 
+<!--
 <!ELEMENT table (tableHead?, (tr+|tableBody))>
 <!ELEMENT tableHead (tr*)>
 <!ELEMENT tableBody (tr*)>
 <!ELEMENT tr (td*)>
 <!ELEMENT td (#PCDATA)>
+-->
+
+<!ELEMENT table (tableHead?, (tr+|tableBody))>
+<!ELEMENT tableHead (tr*)>
+<!ELEMENT tableBody (tr*)>
+<!ELEMENT tr ( (td+|th+) )>
+<!ELEMENT td ANY>
+<!ELEMENT th ANY>
+
+
+
 
 <!ELEMENT menu ((pizza|hamburguesa), complemento*, bebida)>
 <!ELEMENT pizza (ingrediente+)>
 <!ELEMENT hamburguesa (ingrediente+)>
 <!ELEMENT ingrediente (#PCDATA)>
 
+
+
+<!--
 <!ELEMENT pedido (codigo, cliente, notas?, detalles)>
 	<!ELEMENT codigo (#PCDATA)>
 	<!ELEMENT cliente (codigo,nombre,telefono)>
-		<!--<!ELEMENT codigo (#PCDATA)>-->
-		<!--<!ELEMENT nombre (#PCDATA)>-->
+		<!ELEMENT codigo (#PCDATA)>
+		<!ELEMENT nombre (#PCDATA)>
 		<!ELEMENT telefono (#PCDATA)>		
 	<!ELEMENT notas (#PCDATA)>
 	<!ELEMENT detalles (detalle+)>
@@ -89,7 +166,7 @@ Contenido variable
 			<!ELEMENT producto (#PCDATA)>
 			<!ELEMENT precio (#PCDATA)>
 			<!ELEMENT cantidad (#PCDATA)>
-
+-->
 
 
 

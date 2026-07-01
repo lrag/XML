@@ -9,17 +9,35 @@ Referenciamos el DTD
 <raiz>
 
 	<libro>
-		<editorial>&editorial;</editorial>
+		<editorial>&nombreEditorial;</editorial>
 		<autor>Autor1</autor>
 	</libro>
 	<libro>
-		<editorial>&editorial;</editorial>
+		<editorial>&nombreEditorial;</editorial>
 		<autor>Autor2</autor>
 	</libro>
 	<libro>
-		<editorial>&editorial;</editorial>
+		<editorial>&nombreEditorial;</editorial>
 		<autor>Autor3</autor>
 	</libro>
+	
+	<libro>
+		<editorial>Editorial de libros impresos de la Armuña</editorial>
+		<autor>Autor1</autor>
+	</libro>
+	<libro>
+		<editorial>Editorial de libros impresos de la Armuña</editorial>
+		<autor>Autor2</autor>
+	</libro>
+	<libro>
+		<editorial>Editorial de libros impresos de la Armuña</editorial>
+		<autor>Autor3</autor>
+	</libro>
+
+	<documento>
+		<contenido>Este es el contenido</contenido>
+		<textoLegal>&textoLegal;</textoLegal>
+	</documento>
 
 	<cliente>
 		<nombre>Cliente 1</nombre>
@@ -29,15 +47,14 @@ Referenciamos el DTD
 	</cliente>
 	<proveedor>
 		<empresa>Empresa 1</empresa>
+		
 		<telefono>123456789</telefono>
+		<telefono>123456789</telefono>
+		<telefono>123456789</telefono>
+		
 		<email>a@b.c</email>
 		<direccion>C/Falsa, 123</direccion>
 		<cif>987654321</cif>
 	</proveedor>
-
-	<documento>
-		<contenido>Este es el contenido</contenido>
-		<textoLegal>&textoLegal;</textoLegal>
-	</documento>
 
 </raiz>

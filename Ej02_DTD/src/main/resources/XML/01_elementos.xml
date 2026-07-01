@@ -11,7 +11,20 @@ Referenciamos el DTD
 	<nombre>Ringo Starr</nombre>
 	<direccion>C/Su casa</direccion>
 	<telefono>123456789</telefono>
+	<libro>
+		<ISBN></ISBN>
+		<titulo></titulo>
+		<autor>
+			<nombre></nombre>
+			<pais></pais>
+			<fechaNacimiento></fechaNacimiento>
+		</autor>
+		<year></year>
+	</libro>
 	<!--
 	<movida></movida>
 	-->
 </cliente>
+
+
+

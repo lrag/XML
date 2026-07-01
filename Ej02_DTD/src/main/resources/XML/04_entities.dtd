@@ -10,7 +10,7 @@ Para valores repetidos:
 <!ELEMENT editorial (#PCDATA)>
 <!ELEMENT autor (#PCDATA)>
 
-<!ENTITY editorial "Editorial de libros impresos de la Armuña">
+<!ENTITY nombreEditorial "Editorial de libros impresos de la Armuña">
 
 <!--
 Entidades externas
@@ -27,7 +27,7 @@ Entidades de parámetro
 <!ENTITY % nombre "lista de elementos">
 -->
 
-<!ENTITY % datosContacto "telefono, email, direccion">
+<!ENTITY % datosContacto "telefono+, email, direccion">
 
 <!ELEMENT cliente (nombre, %datosContacto;)>
 <!ELEMENT proveedor (empresa, %datosContacto;, cif)>

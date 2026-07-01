@@ -3,7 +3,11 @@
 -->
 
 <!ELEMENT cliente EMPTY>
-<!ATTLIST cliente id CDATA "0">
+<!ATTLIST cliente id CDATA "-1" >
+
+<!-- 
+<cliente id="15"/>
+-->
 
 <!--
 <!ATTLIST element-name attribute-name attribute-type #REQUIRED>
