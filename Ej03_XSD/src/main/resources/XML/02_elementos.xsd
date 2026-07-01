@@ -27,6 +27,13 @@ xs:date
 xs:time
 xs:anyType
 
+<xs:element name="apellidos">
+  <xs:simpleType>
+  	LAS RESTRICCIONES SON PARA CUANDO QUEREMOS VALIDAR. AQUI SOLO PEDIMOS 'string'
+    <xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
 <xs:element name="apellidos" type="xs:string"/>
 <xs:element name="edad"      type="xs:integer"/>
 <xs:element name="fechaAlta" type="xs:date"/>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<producto 
+    xmlns="https://www.curso.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.curso.com 06_empty_complex_elements.xsd"
+	
+	id="1234"
+	nombre="Chintáfono"
+><!-- aaa --></producto>

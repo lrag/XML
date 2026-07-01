@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+XSD Indicators
+
+Para indicar cómo se deben utilizar los elementos en un documento XML
+
+SIETE TIPOS (en tres categorías)
+
+-De orden:
+
+All
+Choice
+Sequence
+
+-Ocurrencias:
+
+maxOccurs
+minOccurs
+
+-Grupo:
+
+Group name
+attributeGroup name
+
+
+>>>>>INDICATORS DE ORDEN
+
+El orden de las etiquetas hijas
+
+SEQUENCE: orden estricto
+
+<xs:element name="coche">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="marca" type="xs:string"/>
+      <xs:element name="modelo" type="xs:string"/>
+      <xs:element name="matricula" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<coche>
+	<marca>
+	<modelo>
+	<matricula>
+</coche>
+
+ALL: cualquier orden
+
+<xs:element name="coche">
+  <xs:complexType>
+    <xs:all>
+      <xs:element name="marca" type="xs:string"/>
+      <xs:element name="modelo" type="xs:string"/>
+      <xs:element name="matricula" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+</xs:element>
+
+<coche>
+	<matricula>
+	<modelo>
+	<marca>
+</coche>
+
+
+CHOICE: Tiene que aparecer uno de los elementos
+
+<xs:element name="persona">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element name="codigoEmpleado" type="xs:string"/>
+      <xs:element name="codigoCliente" type="xs:string"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:element>
+
+
+
+>>>>INDICATORS DE OCURRENCIA
+
+Relacionados con el numero de veces que un elemento puede aparecer
+
+
+-maxOccurs 
+
+El número máximo de veces que un elemento puede aparecer
+
+<xs:element name="libro">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="titulo" type="xs:string"/>
+      <xs:element name="indice" type="xs:string"/>
+      <xs:element name="capitulos" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+-minOccurs 
+
+El número mínimo
+
+<xs:element name="libro">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="titulo" type="xs:string"/>
+      <xs:element name="indice" type="xs:string"/>
+      <xs:element name="prologo" type="xs:string" minOccurs="0"/>
+      <xs:element name="capitulos" type="xs:string" minOccurs="2" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+
+UNA LISTA!
+
+<xs:element name="personas">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="persona" maxOccurs="unbounded">
+		...
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+
+>>>>INDICATORS DE GRUPO
+
+<xs:group name="datosContacto">
+  <xs:sequence>
+    <xs:element name="telefono" type="xs:string"/>
+    <xs:element name="email" type="xs:string"/>
+  </xs:sequence>
+</xs:group>
+
+<xs:element name="cliente">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:group ref="datosContacto"/> 
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<cliente>
+  <nombre>Juan Gómez</nombre>
+  <telefono>123456789</telefono>
+  <email>juangomez@correo.es</email>
+</cliente>
+
+GRUPO FRENTE A PLANTILLA COMPLEX TYPE
+
+<xs:complexType name="tipoContacto">
+  <xs:sequence>
+    <xs:element name="telefono" type="xs:string"/>
+    <xs:element name="email" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="cliente">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="contacto" type="tipoContacto"/> 
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Tenemos un nuevo nivel!
+
+<cliente>
+  <nombre>Juan Gómez</nombre>
+  <contecto>
+  	<telefono>123456789</telefono>
+  	<email>juangomez@correo.es</email>
+  <contacto>
+</cliente>
+
+>>>>INDICATOR DE GRUPO DE ATRIBUTOS
+
+Para reutilizar atributos
+
+<xs:attributeGroup name="nombreDelGrupo">
+...
+</xs:attributeGroup>
+
+
+<xs:attributeGroup name="metadatos">
+  <xs:attribute name="fechaCreacion" type="xs:string"/>
+  <xs:attribute name="fechaModificacion" type="xs:string"/>
+  <xs:attribute name="idioma" type="xs:string"/>
+</xs:attributeGroup>
+
+<xs:element name="producto">
+  <xs:complexType>
+    <xs:attributeGroup ref="metadatos"/>
+  </xs:complexType>
+</xs:element>
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+	<xs:element name="mensaje">
+	  <xs:complexType mixed="true">
+	    <xs:sequence>
+	      <xs:element name="nombre" type="xs:string"/>
+	      <xs:element name="pedido" type="xs:positiveInteger"/>
+	      <xs:element name="fechaEnvio" type="xs:date"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element>
+           
+</xs:schema> 

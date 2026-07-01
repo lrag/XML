@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+Los elementos complejos son etiquetas con hijos
+
+-otras etiquetas
+-atributos
+-nodo de texto
+
+<producto id="123"/>
+
+<empleado>
+	<nombre>Fistro</nombre>
+	<departamento></departamento>
+</empleado>
+
+<pelicula id="123">Desafío total</pelicula>
+
+(nota: un elemento simple no tiene atributos y solo un nodo de texto como hijo)
+
+
+ELEMENTOS COMPLEJOS CON SOLO ETIQUETAS
+
+Dos maneras de definir un elemento complejo:
+
+1-Directamente
+
+<xs:element name="emplado">
+  <xs:complexType> <- - - ANÓNIMO
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/> <- - - Elemento simple
+      <xs:element name="telefono" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Nota: El orden de las etiquetas definidas en la secuencia debe respetarse en el xml
+
+2-Definir el complex type con nombre y referenciarlo en el elemento
+
+<xs:element name="empleado" type="persona"/>
+
+<xs:complexType name="persona"> <- - - TIENE NOMBRE
+  <xs:sequence>
+    <xs:element name="nombre" type="xs:string"/>
+    <xs:element name="telefono" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+Ahora podemos reutilizarlo
+
+<xs:element name="cliente" type="persona"/>
+<xs:element name="alumno" type="persona"/>
+<xs:element name="destinatario" type="persona"/>
+
+
+EXTENSION
+
+Basando un complex type en otro existente
+
+<xs:element name="camion" type="vehículoTransporte"/>
+
+<xs:complexType name="vehiculo"> 
+  <xs:sequence>
+    <xs:element name="marca" type="xs:string"/>
+    <xs:element name="modelo" type="xs:string"/>
+    <xs:element name="matricula" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vehiculoTransporte">
+  <xs:complexContent>
+    <xs:extension base="vehiculo">
+      <xs:sequence>
+        <xs:element name="volumenCarga" type="xs:integer"/>
+      </xs:sequence>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+ETIQUETAS CON HIJOS Y NIETOS
+
+<xs:element name="persona">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="id" type="xs:integer"/>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="telefono" type="xs:string"/>
+      <xs:element name="direccion">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ciudad" type="xs:string"/>
+            <xs:element name="calle" type="xs:string"/>
+            <xs:element name="numero" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+	<xs:element name="camion" type="vehiculoTransporte"/>
+	
+	<xs:complexType name="vehiculo"> 
+	  <xs:sequence>
+	    <xs:element name="marca" type="xs:string"/>
+	    <xs:element name="modelo" type="xs:string"/>
+	    <xs:element name="matricula" type="xs:string"/>
+	  </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="vehiculoTransporte">
+	  <xs:complexContent>
+	    <xs:extension base="vehiculo">
+	      <xs:sequence>
+	        <xs:element name="volumenCarga" type="xs:integer"/>
+	      </xs:sequence>
+	    </xs:extension>
+	  </xs:complexContent>
+	</xs:complexType>           
+           
+</xs:schema> 

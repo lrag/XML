@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+Etiquetas con atributos y un nodo de texto
+
+<producto id="123">Fleje</producto>
+
+<xs:element name="nombre">
+  PODRÁ TENER HIJOS (atributos, etiquetas y nodos de texto
+  <xs:complexType>
+  	AH! PERO LIMITAMOS A ATRIBUTOS Y NODO DE TEXTO
+    <xs:simpleContent>
+      VAMOS A EXTENDER LA ETIQUETA AÑADIENDOLE ATRIBUTOS
+      EL BASE TYPE ES PARA EL NODO DE TEXTO
+      <xs:extension base="basetype"> 
+        ....
+        ....
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+Ejemplo:
+
+<xs:element name="potencia">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:extension base="xs:integer">
+        <xs:attribute name="unidad" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+<potencia unidad="CV">100</potencia>
+<potencia unidad="KW">100</potencia>
+
+////////////////////////////////////
+
+<xs:element name="nombre">
+  <xs:complexType>
+    <xs:simpleContent>
+      PARA TOMAR ALGO QUE YA EXISTE Y RESTRINGIRLO 
+      <xs:restriction base="basetype">
+        ....
+        ....
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+Ejemplito:
+
+Definimos una plantilla para una etiqueta con nodo de texto y un atributo
+
+<xs:complexType name="tipoPrecio">
+  <xs:simpleContent>
+    <xs:extension base="xs:decimal">
+      <xs:attribute name="moneda" type="xs:string" />
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+Ahora definimos una etiqueta que utiliza directamente la plantilla
+
+<xs:element name="precio">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:extension base="tipoPrecio"></xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+ATAJO:
+
+<xs:element name="precio" type="tipoPrecio" />
+
+Definimos una etiqueta que utiliza la plantilla pero restringiendola:
+
+<xs:element name="precioLowCost">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:restriction base="tipoPrecio">
+        <xs:maxInclusive value="20"/>
+        <xs:attribute name="moneda" type="xs:string" use="required" />
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
+
+
+
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+<xs:element name="potencia">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:extension base="xs:integer">
+        
+        <xs:attribute name="unidad">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="CV" />
+              <xs:enumeration value="KW" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>        
+           
+</xs:schema> 

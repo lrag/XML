@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+Etiquetas sin hijos pero con atributos
+
+<producto id="123"/>
+
+<xs:element name="producto">
+  <xs:complexType>
+    <xs:attribute name="prodid" type="xs:positiveInteger"/>
+  </xs:complexType>
+</xs:element>
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+<xs:element name="producto">
+  <xs:complexType>
+    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="nombre" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:element>         
+           
+</xs:schema> 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<potencia 
+    xmlns="https://www.curso.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.curso.com 07_text_complex_elements.xsd"
+	
+	unidad="KW"
+>100</potencia>

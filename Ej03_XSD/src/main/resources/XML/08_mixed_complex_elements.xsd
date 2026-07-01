@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+
+
+
+Etiquetas con atributos, nodos de texto y etiquetas
+
+<mensaje>
+	Estimado <nombre>Antúnez</nombre>
+	Su pedido <pedido>1234</pedido>
+	será enviado el día <fechaEnvio>10/05/2035</fechaEnvio>.
+</div>
+
+<xs:element name="mensaje">
+  <xs:complexType mixed="true">
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="pedido" type="xs:positiveInteger"/>
+      <xs:element name="fechaEnvio" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+Con un atributo
+
+<xs:element name="mensaje">
+  <xs:complexType mixed="true">
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="pedido" type="xs:positiveInteger"/>
+      <xs:element name="fechaEnvio" type="xs:date"/>
+    </xs:sequence>
+    
+    <xs:attribute name="idioma" type="xs:string" use="optional" />
+    
+  </xs:complexType>
+</xs:element>
+
+
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+	<xs:element name="mensaje">
+	  <xs:complexType mixed="true">
+	    <xs:sequence>
+	      <xs:element name="nombre" type="xs:string"/>
+	      <xs:element name="pedido" type="xs:positiveInteger"/>
+	      <xs:element name="fechaEnvio" type="xs:date"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element>
+           
+</xs:schema> 

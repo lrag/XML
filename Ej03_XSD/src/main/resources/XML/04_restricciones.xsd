@@ -127,6 +127,7 @@ maxLength
 minLength	
 minExclusive	>
 minInclusive	>=
+positiveInteger
 pattern	
 totalDigits	
 whiteSpace	

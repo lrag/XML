@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<camion 
+    xmlns="https://www.curso.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.curso.com 05_elementos_complejos.xsd">
+	<marca>Pegaso</marca>
+	<modelo>Troner</modelo>
+	<matricula>M-1234-FF</matricula>
+	<volumenCarga>100</volumenCarga>	
+</camion>
