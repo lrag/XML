@@ -44,6 +44,7 @@ function getListadoPeliculas(){
         return responseHead.text() //en vez de response.json()
     }) 
     .then(function(xml) {
+    	/*
         const parser = new DOMParser();
         //xmlDoc representa la raíz del árbol
         const xmlDoc = parser.parseFromString(xml, "application/xml");
@@ -63,6 +64,32 @@ function getListadoPeliculas(){
             peliculas.push(pelicula);
         }
         rellenarTabla(peliculas)
+        */
+        
+    	const parser = new DOMParser();
+    	const xmlDoc = parser.parseFromString(xml, "application/xml");
+
+    	//Buscamos películas desde el raíz
+    	const resultadoXPath = xmlDoc.evaluate("//pelicula", xmlDoc, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+
+    	const peliculas = [];
+    	let nodoPelicula = resultadoXPath.iterateNext();
+
+    	while (nodoPelicula) {
+    	    const pelicula = {
+    	        id      : parseInt(nodoPelicula.getAttribute("id")), 
+    	        //Estas búsquedas son a partir del nodo película
+    	        titulo  : xmlDoc.evaluate("titulo", nodoPelicula, null, XPathResult.STRING_TYPE, null).stringValue,
+    	        director: xmlDoc.evaluate("director", nodoPelicula, null, XPathResult.STRING_TYPE, null).stringValue,
+    	        genero  : xmlDoc.evaluate("genero", nodoPelicula, null, XPathResult.STRING_TYPE, null).stringValue,
+    	        year    : parseInt(xmlDoc.evaluate("year", nodoPelicula, null, XPathResult.STRING_TYPE, null).stringValue)
+    	    };
+    	    
+    	    peliculas.push(pelicula);
+    	    nodoPelicula = resultadoXPath.iterateNext(); 
+    	}
+
+    	rellenarTabla(peliculas);   
     })
     .catch(error => console.error(error));    
 }
@@ -81,17 +108,60 @@ function rellenarTabla(peliculas){
     })
 }
 
-window.onload = function(){
-    //getListadoPeliculas()    
+function insertarPelicula(){
+
+	let xml = `
+        <pelicula>
+            <titulo>${$('#titulo').val()}</titulo>
+            <director>${$('#director').val()}</director>
+            <genero>${$('#genero').val()}</genero>
+            <year>${$('#year').val()}</year>
+        </pelicula>
+    `
+
+    fetch("http://localhost:8080/peliculas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/xml", 
+            "Accept": "application/xml"        
+        },
+        body: xml 
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al insertar: ${response.status}`);
+        }
+        return response.text(); 
+    })
+    .then(xmlRespuesta => {
+        alert("¡Película insertada con éxito!")
+        console.log("Respuesta:", xmlRespuesta)
+        getListadoPeliculas()
+        vaciarFormulario()
+    })
+    .catch(error => {
+        console.error("Hubo un problema con la petición:", error)
+        alert("No se pudo insertar la película. Revisa los datos o el formato.")
+    })
 }
 
+function vaciarFormulario(){
+    $('#titulo').val('')
+    $('#director').val('')
+    $('#genero').val('')
+    $('#year').val('')
+}
 
+window.onload = function(){
+    getListadoPeliculas()    
+    document.getElementById("btnInsertar").onclick = insertarPelicula
+}
 
 </script>
 
 <body>
 
-    <input type="button" onclick="getListadoPeliculas()">
+    <!--<input type="button" onclick="getListadoPeliculas()">-->
 
 
 	<h1 align="center">XML</h1>

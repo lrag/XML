@@ -17,6 +17,10 @@ Los elementos complejos son etiquetas con hijos
 
 <pelicula id="123">Desafío total</pelicula>
 
+<div>
+	Siete cabllos vienen de <b>Bonanza</b>.
+</div>
+
 (nota: un elemento simple no tiene atributos y solo un nodo de texto como hijo)
 
 
@@ -26,7 +30,7 @@ Dos maneras de definir un elemento complejo:
 
 1-Directamente
 
-<xs:element name="emplado">
+<xs:element name="empleado">
   <xs:complexType> <- - - ANÓNIMO
     <xs:sequence>
       <xs:element name="nombre" type="xs:string"/> <- - - Elemento simple
@@ -59,6 +63,7 @@ EXTENSION
 
 Basando un complex type en otro existente
 
+<xs:element name="coche"  type="vehículo"/>
 <xs:element name="camion" type="vehículoTransporte"/>
 
 <xs:complexType name="vehiculo"> 
@@ -107,7 +112,25 @@ ETIQUETAS CON HIJOS Y NIETOS
            targetNamespace="https://www.curso.com"      
            xmlns="https://www.curso.com"			   
            elementFormDefault="qualified">
-           
+        
+	<xs:element name="empleado" type="persona"/>
+	
+	<!-- ////////////////////////////////////// -->
+	
+	<xs:complexType name="persona"> 
+	  <xs:sequence>
+	    <xs:element name="nombre" type="xs:string"/>
+	    <xs:element name="telefono" type="xs:string"/>
+	  </xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="cliente" type="persona"/>
+	<xs:element name="alumno" type="persona"/>
+	<xs:element name="destinatario" type="persona"/>	
+	
+	<!-- ////////////////////////////////////// -->
+	
+	<xs:element name="coche"  type="vehiculo"/>
 	<xs:element name="camion" type="vehiculoTransporte"/>
 	
 	<xs:complexType name="vehiculo"> 
@@ -126,6 +149,38 @@ ETIQUETAS CON HIJOS Y NIETOS
 	      </xs:sequence>
 	    </xs:extension>
 	  </xs:complexContent>
-	</xs:complexType>           
+	</xs:complexType>   
+	
+	
+	<!-- ////////////////////////////////////// -->
+	
+	<xs:element name="persona">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="id" type="xs:integer"/>
+	      <xs:element name="nombre" type="xs:string"/>
+	      <xs:element name="telefono" type="xs:string"/>
+	      <xs:element name="direccion" type="tipoDireccion"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="factura">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="id" type="xs:integer"/>
+	      <xs:element name="codigo" type="xs:string"/>
+	      <xs:element name="direccionFacturacion" type="tipoDireccion"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element>	
+	        
+    <xs:complexType name="tipoDireccion">
+      <xs:sequence>
+        <xs:element name="ciudad" type="xs:string"/>
+        <xs:element name="calle" type="xs:string"/>
+        <xs:element name="numero" type="xs:integer"/>
+      </xs:sequence>
+    </xs:complexType>	        
            
 </xs:schema> 

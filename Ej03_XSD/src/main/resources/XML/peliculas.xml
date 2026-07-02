@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE peliculas SYSTEM "peliculas.dtd">
-<peliculas>
+
+<peliculas 
+    xmlns="https://www.tusistema.com/peliculas"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.tusistema.com/peliculas peliculas.xsd">
+    
 	<pelicula id="1">
 		<titulo>2001</titulo>
 		<director>Stanley Kubrick</director>

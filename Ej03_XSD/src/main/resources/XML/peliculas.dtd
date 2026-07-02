@@ -1,8 +1,0 @@
-<!ELEMENT peliculas (pelicula*)>
-
-<!ELEMENT pelicula (titulo, director, genero, year)>
-<!ATTLIST pelicula id CDATA #REQUIRED>
-<!ELEMENT titulo    (#PCDATA)>
-<!ELEMENT director  (#PCDATA)>
-<!ELEMENT genero    (#PCDATA)>
-<!ELEMENT year      (#PCDATA)>

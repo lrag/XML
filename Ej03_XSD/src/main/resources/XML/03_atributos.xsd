@@ -16,6 +16,8 @@ xs:date
 xs:time
 xs:anyType
 
+Por defecto los atributos serán opcionales
+
 <xs:attribute name="idioma" type="xs:string"/>
 
 DEFAULT
@@ -24,7 +26,7 @@ DEFAULT
 
 FIXED
 
-<xs:attribute name="nombre_atributo" type="tipo_atributo" fized="valor_obligatorio"/>
+<xs:attribute name="nombre_atributo" type="tipo_atributo" fixed="valor_obligatorio"/>
 
 ATRIBUTO OBLIGATORIO
 

@@ -3,15 +3,23 @@
 <!--  
 
 
+<nombre>Luis Ramón <apellidos>Alvarez</apellidos></nombre> WTF
+
+<nombreCompleto> OK
+	<nombre>LR</nombre>
+	<apellidos>AG</apellidos>
+</nombreCompleto>
 
 
-Etiquetas con atributos, nodos de texto y etiquetas
+//////////////////////////////////////////////////////////////
+
+Etiquetas con atributos, nodos de texto y etiquetas como hijos
 
 <mensaje>
 	Estimado <nombre>Antúnez</nombre>
 	Su pedido <pedido>1234</pedido>
 	será enviado el día <fechaEnvio>10/05/2035</fechaEnvio>.
-</div>
+</mensaje>
 
 <xs:element name="mensaje">
   <xs:complexType mixed="true">
@@ -39,6 +47,20 @@ Con un atributo
 </xs:element>
 
 
+<mensaje idioma="">
+	<nombre>Antunez</nombre>
+	<pedido>321</pedido>
+	<fecha>2026-12-23</fecha>
+	<texto>
+		Estimado Antúnez
+		Su pedido 321
+		será enviado el día 2026-12-23.
+		Gracias por su dinero.	
+	</texto>
+</mensaje>
+
+
+
 
 -->
 
@@ -55,7 +77,7 @@ Con un atributo
 	      <xs:element name="pedido" type="xs:positiveInteger"/>
 	      <xs:element name="fechaEnvio" type="xs:date"/>
 	    </xs:sequence>
+	    <xs:attribute name="idioma" type="xs:string" use="optional" />
 	  </xs:complexType>
-	</xs:element>
-           
+	</xs:element>           
 </xs:schema> 

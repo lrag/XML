@@ -1,9 +1,6 @@
 package com.curso.endpoint.dto;
 import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
-@JsonRootName("respuesta")
 public class Respuesta<T> {
 
     private boolean success;
@@ -11,7 +8,11 @@ public class Respuesta<T> {
     private T data;
     private Long timestamp;
 
-    private Respuesta(boolean success, String message, T data) {
+    public Respuesta() {
+		super();
+	}
+
+	private Respuesta(boolean success, String message, T data) {
         this.success = success;
         this.message = message;
         this.data = data;

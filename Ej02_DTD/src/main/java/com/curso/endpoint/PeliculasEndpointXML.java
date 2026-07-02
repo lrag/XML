@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -42,53 +43,6 @@ public class PeliculasEndpointXML {
 	    return ResponseEntity.ok(respuesta);		
 	}
 	
-	/*
-	@PostMapping(
-			path = "/peliculas", 
-			consumes = { MediaType.APPLICATION_XML_VALUE }
-		)
-	public ResponseEntity<String> insertarPelicula(@RequestBody String xmlString) {        
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            
-            //Desactivamos la validación automática tradicional por DOCTYPE
-            factory.setValidating(false); 
-            factory.setNamespaceAware(true);
-
-            //Añadimos el DTD en el servidor
-            String dtdUrl = new ClassPathResource("xml/peliculas.dtd").getURL().toExternalForm();
-            factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaLanguage", "http://www.w3.org/XML/1998/namespace");
-            factory.setAttribute("http://apache.org/xml/properties/schema/external-noNamespaceSchemaLocation", dtdUrl);
-
-            DocumentBuilder builder = factory.newDocumentBuilder();
-
-            //Error handler
-            builder.setErrorHandler(new org.xml.sax.ErrorHandler() {
-                @Override
-                public void warning(org.xml.sax.SAXParseException e) { throw new RuntimeException("WTF"); }
-                @Override
-                public void error(org.xml.sax.SAXParseException e) throws SAXException { throw e; }
-                @Override
-                public void fatalError(org.xml.sax.SAXParseException e) throws SAXException { throw e; }
-            });
-
-            //Analizamos el XML en crudo
-            builder.parse(new InputSource(new StringReader(xmlString)));
-
-            XmlMapper xmlMapper = new XmlMapper();
-            PeliculaDTO peliculaDTO = xmlMapper.readValue(xmlString, PeliculaDTO.class);
-            
-            System.out.println("Película: " + peliculaDTO);
-            return new ResponseEntity<>("Película insertada correctamente", HttpStatus.CREATED);
-
-        } catch (SAXException e) {
-            return new ResponseEntity<>("Error de validación (DTD): " + e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error interno: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    */
-	
 	@PostMapping(
 		    path = "/peliculas", 
 		    consumes = { MediaType.APPLICATION_XML_VALUE }
@@ -108,7 +62,7 @@ public class PeliculasEndpointXML {
 
 	        //EntityResolver
 	        builder.setEntityResolver((publicId, systemId) -> {
-	        	//DE aquí y solo de aquí
+	        	//De aquí y solo de aquí
 	            return new InputSource(new ClassPathResource("xml/peliculas.dtd").getInputStream());
 	        });
 
@@ -133,9 +87,9 @@ public class PeliculasEndpointXML {
 	        InputStream streamCombinado = new SequenceInputStream(doctypeStream, xmlStream);
 
 	        //Validación
-	        builder.parse(streamCombinado);
+	        Document dom = builder.parse(streamCombinado);
 
-	        //Si no se ha lancazo excepción creamos el objeto
+	        //Si no se ha lanzado excepción creamos el objeto
 	        XmlMapper xmlMapper = new XmlMapper();
 	        PeliculaDTO peliculaDTO = xmlMapper.readValue(xmlString, PeliculaDTO.class);
 	        

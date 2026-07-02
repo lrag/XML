@@ -2,14 +2,9 @@ package com.curso.endpoint;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.sax.SAXSource;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 import com.curso.endpoint.dto.PeliculaDTO;
 import com.curso.endpoint.dto.Respuesta;
@@ -31,56 +28,83 @@ public class PeliculasEndpointXML {
 
 	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Respuesta<?>> listarPeliculas() throws IOException{
+
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("XML/peliculas.xml");
-		XmlMapper xmlMapper = new XmlMapper();
-		Map<String, Object> datosXml = xmlMapper.readValue(inputStream, Map.class);
-		Map<String, Map<String, Object>> peliculas = new HashMap<>();
-		peliculas.put("peliculas", datosXml);
-	    Respuesta<Map<String, ?>> respuesta = Respuesta.success(peliculas, "Listado de películas");
+	    
+	    XmlMapper xmlMapper = new XmlMapper();
+	    xmlMapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	    
+	    com.fasterxml.jackson.databind.JsonNode rootNode = xmlMapper.readTree(inputStream);
+	    com.fasterxml.jackson.databind.JsonNode peliculasNode = rootNode.path("pelicula");
+	    PeliculaDTO[] arrayPeliculas = xmlMapper.treeToValue(peliculasNode, PeliculaDTO[].class);
+	    
+	    //Nodo raíz para los datos creado dinámicamente
+	    com.fasterxml.jackson.databind.node.ObjectNode dataNode = xmlMapper.createObjectNode();
+	    
+	    com.fasterxml.jackson.databind.node.ArrayNode arrayNode = xmlMapper.createArrayNode();
+	    for (PeliculaDTO p : arrayPeliculas) {
+	        //Envolvemos cada película en un nodo con el nombre "pelicula" 
+	        arrayNode.add(xmlMapper.createObjectNode().putPOJO("pelicula", p));
+	    }
+	    
+	    //Añadimos las películas al nodo
+	    dataNode.set("peliculas", arrayNode);
+	    
+	    Respuesta<com.fasterxml.jackson.databind.node.ObjectNode> respuesta = 
+	        Respuesta.success(dataNode, "Listado de películas");
+	        
 	    return ResponseEntity.ok(respuesta);		
 	}
 	
 	@PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<String> insertarPelicula(@RequestBody String xmlString) {        
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            
-            //Desactivamos la validación automática tradicional por DOCTYPE
-            factory.setValidating(false); 
-            factory.setNamespaceAware(true);
+	public ResponseEntity<String> insertarPelicula(@RequestBody String xmlRaw) {        
+	    try {
+	        //Leemos el xsd
+	        org.springframework.core.io.ClassPathResource xsdResource = 
+	            new org.springframework.core.io.ClassPathResource("./XML/peliculas.xsd");
 
-            //Añadimos el DTD en el servidor
-            String dtdUrl = new ClassPathResource("xml/peliculas.dtd").getURL().toExternalForm();
-            factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaLanguage", "http://www.w3.org/XML/1998/namespace");
-            factory.setAttribute("http://apache.org/xml/properties/schema/external-noNamespaceSchemaLocation", dtdUrl);
+	        //Validador
+	        javax.xml.validation.SchemaFactory factory = 
+	            javax.xml.validation.SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+	        javax.xml.validation.Schema schema = factory.newSchema(xsdResource.getURL());
+	        javax.xml.validation.Validator xsdValidator = schema.newValidator();
 
-            DocumentBuilder builder = factory.newDocumentBuilder();
+	        //Este filtro intercepta los elementos y les inyecta el namespace en memoria durante el procesamiento
+	        XMLFilterImpl namespaceFilter = new XMLFilterImpl() {
+	            @Override
+	            public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
+	                //Si el elemento no tiene namespace, le asignamos el del XSD dinámicamente
+	                if (uri == null || uri.isEmpty()) {
+	                    uri = "https://www.curso.com/peliculas";
+	                }
+	                super.startElement(uri, localName, qName, atts);
+	            }
+	        };
 
-            //Error handler
-            builder.setErrorHandler(new org.xml.sax.ErrorHandler() {
-                @Override
-                public void warning(org.xml.sax.SAXParseException e) {}
-                @Override
-                public void error(org.xml.sax.SAXParseException e) throws SAXException { throw e; }
-                @Override
-                public void fatalError(org.xml.sax.SAXParseException e) throws SAXException { throw e; }
-            });
+	        //Acoplamos el filtro al lector SAX estándar de Java
+	        javax.xml.parsers.SAXParserFactory spf = javax.xml.parsers.SAXParserFactory.newInstance();
+	        spf.setNamespaceAware(true);
+	        org.xml.sax.XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+	        namespaceFilter.setParent(xmlReader);
 
-            //Analizamos el XML en crudo
-            builder.parse(new InputSource(new StringReader(xmlString)));
+	        //Preparamos el origen de datos usando el filtro y el String original intacto
+	        SAXSource saxSource = new SAXSource(namespaceFilter, new InputSource(new java.io.StringReader(xmlRaw)));
 
-            XmlMapper xmlMapper = new XmlMapper();
-            PeliculaDTO peliculaDTO = xmlMapper.readValue(xmlString, PeliculaDTO.class);
-            
-            System.out.println("Película: " + peliculaDTO);
-            return new ResponseEntity<>("Película insertada correctamente", HttpStatus.CREATED);
-
-        } catch (SAXException e) {
-            return new ResponseEntity<>("Error de validación (DTD): " + e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error interno: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	        //Validacion
+	        xsdValidator.validate(saxSource);
+	        
+	        //Creamos el objeto
+	        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper = new com.fasterxml.jackson.dataformat.xml.XmlMapper();
+	        xmlMapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	        PeliculaDTO peliculaDTO = xmlMapper.readValue(xmlRaw, PeliculaDTO.class);
+	        System.out.println("Pelicula para insertar: "+peliculaDTO);
+	        
+	        return new ResponseEntity<>("Película insertada con éxito", HttpStatus.CREATED);	          
+	        
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("XML Inválido según XSD: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
+	}	
 	
 }	
 	

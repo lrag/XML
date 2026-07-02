@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+ANY
+
+Comodin para indicar que en un punto del xml se puede esperar cualquier etiqueta
+
+<xs:element name="pelicula">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="titulo" type="xs:string"/>
+      <xs:element name="director" type="xs:string"/>
+      <xs:element name="genero" type="xs:string"/>
+      <xs:element name="year" type="xs:string"/>
+      
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+      
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer"/>
+  </xs:complexType>
+</xs:element>
+
+PROCESS CONTENTS
+
+strict: las etiquetas que vengan deben estar declaradas en el xsd
+skip  : que venga la que sea
+lax   : si la etiqueta está en el xsd se valida, si no se ignora
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+	<xs:element name="pelicula">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="titulo" type="xs:string"/>
+	      <xs:element name="director" type="xs:string"/>
+	      <xs:element name="genero" type="xs:string"/>
+	      <xs:element name="year" type="xs:string"/>
+	      
+	      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+	      
+	    </xs:sequence>
+	    <xs:attribute name="id" type="xs:integer"/>
+	  </xs:complexType>
+	</xs:element>
+           
+</xs:schema> 

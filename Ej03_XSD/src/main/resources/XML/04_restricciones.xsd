@@ -4,7 +4,7 @@
 
 Restrictiones / Facets
 
-Validacion de datos
+Validacion de datos durante el procesamiento del XML
 
 MIN/MAX para integer
 
@@ -52,7 +52,7 @@ NO es anónimo
 
 EXPRESIONES REGULARES
 
-<xs:element name="letra">
+<xs:element name="letraMinuscula">
   <xs:simpleType>
     <xs:restriction base="xs:string">
       <xs:pattern value="[a-z]"/>
@@ -139,5 +139,36 @@ whiteSpace
            targetNamespace="https://www.curso.com"      
            xmlns="https://www.curso.com"			   
            elementFormDefault="qualified">
+           
+	<xs:element name="fechaNacimiento" type="xs:date"/>           
+           
+	<xs:element name="edad">
+	  <xs:simpleType>
+	    <xs:restriction base="xs:integer">
+	      <xs:minInclusive value="0"/>
+	      <xs:maxInclusive value="200"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	</xs:element>  
+	
+	<xs:element name="coche">
+	  <xs:simpleType> 
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="Authi"/>
+	      <xs:enumeration value="Simca"/>
+	      <xs:enumeration value="Talbot"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	</xs:element>	
+	
+	<xs:element name="vehiculoAutomovil" type="marca"/>
+
+	<xs:simpleType name="marca">
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="Authi"/>
+	    <xs:enumeration value="Simca"/>
+	    <xs:enumeration value="Talbot"/>
+	  </xs:restriction>
+	</xs:simpleType>
            
 </xs:schema> 

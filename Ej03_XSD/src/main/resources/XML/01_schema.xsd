@@ -11,7 +11,7 @@ Es el raíz de todo xsd
 
 Puede contener atributos
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" => espacio de nombres para etiquetas y tipos de datos. El prefijo es xs (convenio)
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" => espacio de nombres para etiquetas y tipos de datos. El prefijo es xs/xsd (convenio)
            targetNamespace="https://www.curso.com"     => espacio de nombres de nuestros xml que utilicen este xsd. 
            xmlns="https://www.curso.com"			   => espacio de nombres por defecto. para referenciar nuestras propias etiquetas sin prefijo
            elementFormDefault="qualified">			   => todo el árbol de etiquetas que cuelga de la que define el namespace pertenece al namespace

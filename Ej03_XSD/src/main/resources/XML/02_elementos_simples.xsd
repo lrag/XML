@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  
+
+
+
+ELEMENTOS SIMPLES
+
+Solo contienen un nodo de texto
+El nodo de texto puede tener un tipo
+
+<xs:element name="nombre_etiqueta">
+  <xs:simpleType>
+    <xs:restriction base="tipo_del_nodo_de_texto"/>
+  </xs:simpleType>
+</xs:element>
+
+ATAJO:
+
+<xs:element name="nombre_etiqueta" type="tipo_del_nodo_de_texto"/>
+
+TIPOS
+
+xs:string
+xs:decimal
+xs:integer
+xs:boolean
+xs:date
+xs:time
+xs:anyType
+
+<xs:element name="apellidos">
+  <xs:simpleType>
+  	LAS RESTRICCIONES SON PARA CUANDO QUEREMOS VALIDAR. AQUI SOLO PEDIMOS 'string'
+    <xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="apellidos" type="xs:string"/>
+<xs:element name="edad"      type="xs:integer"/>
+<xs:element name="fechaAlta" type="xs:date"/>
+
+VALORES POR DEFECTO
+
+<xs:element name="color" type="xs:string" default="colorao"/>
+
+VALORES FIJOS
+
+<xs:element name="color" type="xs:string" fixed="colorao"/>
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="https://www.curso.com"      
+           xmlns="https://www.curso.com"			   
+           elementFormDefault="qualified">
+           
+	<xs:element name="color" type="xs:string" default="colorao"/>	      
+	
+	<xs:element name="edad" type="xs:integer"/> 
+	
+	<xs:element name="fechaAlta" type="xs:date"/>
+           
+</xs:schema> 

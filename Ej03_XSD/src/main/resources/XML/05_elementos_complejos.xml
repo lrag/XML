@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
 <camion 
     xmlns="https://www.curso.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,3 +10,28 @@
 	<matricula>M-1234-FF</matricula>
 	<volumenCarga>100</volumenCarga>	
 </camion>
+
+<alumno xmlns="https://www.curso.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.curso.com 05_elementos_complejos.xsd">
+
+	<nombre>aaa</nombre>
+	<telefono>bbb</telefono>
+
+</alumno>
+
+-->
+
+<persona xmlns="https://www.curso.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.curso.com 05_elementos_complejos.xsd">
+
+	<id>1</id>
+	<nombre>Ringo Starr</nombre>
+	<telefono>555123456</telefono>
+	<direccion>
+		<ciudad>Liverpool</ciudad>
+		<calle>C/Su calle</calle>
+		<numero>123</numero>
+	</direccion>
+</persona>

@@ -18,7 +18,7 @@ function getPeliculas(){
     .then(xml => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xml, "application/xml");
-
+        
         const etiquetasPelicula = xmlDoc.getElementsByTagName("pelicula");
         const peliculas = [];
 
@@ -35,7 +35,7 @@ function getPeliculas(){
         }
         rellenarTabla(peliculas)
     })
-    .catch(error => console.error(error));    
+    .catch(error => console.error(error)) 
 }
 
 function rellenarTabla(peliculas){
@@ -52,15 +52,45 @@ function rellenarTabla(peliculas){
     })
 }
 
+function crearXML(){	
+	//Creamos un documento XML vacío con el nodo raíz <pelicula>
+	let xmlDoc = document.implementation.createDocument("", "pelicula", null);
+	let raiz = xmlDoc.documentElement;
+
+	let titulo = xmlDoc.createElement("titulo"); //Crear nodo
+	titulo.textContent = $('#titulo').val();     //Le añadimos un nodo de texto
+	raiz.appendChild(titulo);                    //Añadir al padre
+
+	let director = xmlDoc.createElement("director"); 
+	director.textContent = $('#director').val();     
+	raiz.appendChild(director);                      
+
+	let genero = xmlDoc.createElement("genero");     
+	genero.textContent = $('#genero').val();         
+	raiz.appendChild(genero);                        
+
+	let year = xmlDoc.createElement("year");         
+	year.textContent = $('#year').val();             
+	raiz.appendChild(year);                          
+
+	let serializer = new XMLSerializer();
+	return serializer.serializeToString(xmlDoc);
+}
+
 function insertarPelicula(){
+	
+	/*
 	let xml = `
-        <pelicula>
+        <pelicula>            
             <titulo>${$('#titulo').val()}</titulo>
             <director>${$('#director').val()}</director>
             <genero>${$('#genero').val()}</genero>
             <year>${$('#year').val()}</year>
         </pelicula>
     `
+    */
+    
+    let xml = crearXML()
 
     fetch("http://localhost:8080/peliculas", {
         method: "POST",

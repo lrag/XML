@@ -1,7 +1,9 @@
 package com.curso.endpoint.dto;
 
 import com.curso.modelo.entidad.Pelicula;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JacksonXmlRootElement(localName = "pelicula")
 public class PeliculaDTO {
 
 	private Integer id;
